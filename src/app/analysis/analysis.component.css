@@ -1,0 +1,18 @@
+.pitanjeOdgovor {
+    list-style: none
+}
+.pitanje {
+    width: 14%;
+    display:inline-block;
+    height: 45px;
+}
+
+.odgovor {
+    width: 85%;
+    height: 45px;
+    display:inline-block;
+}
+.opisProblema input {
+    width: 100%;
+    height:auto;
+}
