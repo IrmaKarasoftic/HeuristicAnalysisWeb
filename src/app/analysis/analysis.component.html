@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row">
 		<br/>
-		<div class="panel panel-primary">
+		<div class="panel panel-primary" id="QAdiv">
 			<div class="panel-heading">
 				<p> 1. Vidljivost stanja sistema Potrebno je analizirati da li korisnik u svakom momentu raspolaže adekvatnim informacijama
 					o trenutnom statusu. Pitanja za analizu:
@@ -17,33 +17,48 @@
 				</p>
 			</div>
 			<!--.panel-heading-->
-
-			<div class="panel-body">
-				<h4>Evaluacija:</h4>
-			</div>
-			<ul class="list-group-item pitanjeOdgovor">
-					<div class="pitanje" >Opis problema</div>
-					<div class="odgovor  opisProblema">
-							<input type="text" name="fname">
-					</div>
-			</ul>
-			
-			<ul class="list-group-item pitanjeOdgovor">
-				<div class="pitanje" >Nivo problema</div>
-				<div class="odgovor">
-					<li class="">
-						<label class="radio-inline">
-							<input type="radio" name="optradio">Nizak
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="optradio">Srednji
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="optradio">Visok
-						</label>
-					</li>
+			<div id="odgovori">
+				<div class="odgovori">
+					<ul class="list-group-item pitanjeOdgovor">
+						<div class="pitanje">Opis problema</div>
+						<div class="odgovor opisProblema">
+							<textarea rows='3'></textarea>
+						</div>
+					</ul>
+					<ul class="list-group-item pitanjeOdgovor">
+						<div class="pitanje">Nivo problema</div>
+						<div class="odgovor">
+							<li class="">
+								<label class="radio-inline">
+									<input type="radio" name="optradio">Nizak
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="optradio">Srednji
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="optradio">Visok
+								</label>
+							</li>
+						</div>
+					</ul>
+					<ul class="list-group-item pitanjeOdgovor">
+						<div class="pitanje">Lokacija problema</div>
+						<div class="odgovor opisProblema">
+							<textarea rows='2'></textarea>
+						</div>
+					</ul>
+					<ul class="list-group-item pitanjeOdgovor">
+						<div class="pitanje">Preporuka za poboljšanje</div>
+						<div class="odgovor opisProblema">
+							<textarea rows='3'></textarea>
+						</div>
+						<br>
+					</ul>
+					<hr>
 				</div>
-			</ul>
+			</div>
+			<button type="button" class="btn btn-primary pull-right" id="dodajOdgovor">Dodaj jos jedan set odgovora</button>
+
 		</div>
 	</div>
 </div>

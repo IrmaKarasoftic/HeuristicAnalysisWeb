@@ -1,18 +1,28 @@
 .pitanjeOdgovor {
     list-style: none
 }
+.odgovori {
+    border: 10px black;
+}
 .pitanje {
-    width: 14%;
+    width: 18%;
     display:inline-block;
-    height: 45px;
+    vertical-align: center;
 }
 
 .odgovor {
-    width: 85%;
-    height: 45px;
+    width: 80%;
     display:inline-block;
+    vertical-align: center;
 }
-.opisProblema input {
-    width: 100%;
-    height:auto;
+.opisProblema textarea {
+    overflow:hidden;
+  width:100%;
+  font-size:14px;
+  display:block;
+  color: black;
+}
+
+.dodajOdgovor {
+    margin: 10px;
 }
