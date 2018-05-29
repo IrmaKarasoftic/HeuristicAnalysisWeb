@@ -1,0 +1,30 @@
+.odgovori {
+    border: 10px black;
+}
+
+.odgovor {
+    width: 80%;
+    display:inline-block;
+    vertical-align: center;
+}
+.pitanjeOdgovor {
+    list-style: none
+}
+
+.pitanje {
+    width: 18%;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.opisProblema textarea {
+    overflow:hidden;
+  width:100%;
+  font-size:14px;
+  display:block;
+  color: black;
+}
+
+.dodajOdgovor {
+    margin: 10px;
+}
