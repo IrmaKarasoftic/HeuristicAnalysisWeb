@@ -13,14 +13,20 @@
         <li class="nav-item">
             <a class="nav-link" href="../analysis/">Analiza</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../admin/">Admin panel</a>
-        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admin panel
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="../admin/">Applications</a>
+              <a class="dropdown-item" href="../users">Users</a>
+            </div>
+          </li>
       </ul>
 
-      <ul class="nav navbar-nav ml-auto  pull-right">
+      <ul class="navbar-nav pull-right">
         <li class="nav-item">
-            <a class="nav-link" href="../logout/">Log Out</a>
+            <a class="nav-link" href="../login/">Log Out</a>
           </li>
       </ul>
 

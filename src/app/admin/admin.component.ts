@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Application } from './application';
+import { AdminService } from './admin.service';
 
 @Component({
   selector: 'app-admin',
@@ -45,13 +46,17 @@ export class AdminComponent implements OnInit {
       },
     ],
   };
-
-  constructor() { }
+apps;
+  constructor(private adminService: AdminService) { }
  
-
   ngOnInit() {
     this.aplikacije.push(this.a1);
     this.aplikacije.push(this.a2);
+
+    this.adminService.getApps().subscribe(apps => {
+      this.apps = apps
+      console.log(this.apps);
+    })
   }
   public expand(item) {
     item.expanded = !item.expanded;
