@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
 import { Answer } from './analysis.model';
 @Component({
   selector: 'app-analysis',
@@ -10,17 +9,17 @@ export class AnalysisComponent implements OnInit {
   answers: Answer[] = [];
 
   a1: Answer = {
-    opisProblema: "Opis1",
-    lokacijaProblema: "Lokacija1",
+    opisProblema: 'Opis1',
+    lokacijaProblema: 'Lokacija1',
     nivoProblema: 1,
-    preporukaZaPoboljsanje: "Preporuka1"
-  }
+    preporukaZaPoboljsanje: 'Preporuka1'
+  };
   default: Answer = {
-    opisProblema: "",
-    lokacijaProblema: "",
+    opisProblema: '',
+    lokacijaProblema: '',
     nivoProblema: 1,
-    preporukaZaPoboljsanje: ""
-  }
+    preporukaZaPoboljsanje: ''
+  };
   constructor() { }
 
   ngOnInit() {

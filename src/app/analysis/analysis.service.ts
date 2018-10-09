@@ -8,7 +8,6 @@ export class AnalysisService {
   constructor(private http: Http) { }
 
   getAnalysisData() {
-    return this.http.get('/api/analysis')
-    .map(res => res.json());
+    return this.http.get('/api/analysis');
   }
 }

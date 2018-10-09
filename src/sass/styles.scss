@@ -1,0 +1,9 @@
+@import './_variables';
+@import './mixins';
+@import '~bootstrap/scss/bootstrap';
+
+body, html {
+    background-repeat: repeat;
+    background-position: center top; 
+    background-size: cover;
+}

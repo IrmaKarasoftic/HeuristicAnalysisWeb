@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="tab">
+    <button class="tablinks" (click)="tabindex=1">Korisnici</button>
+    <button class="tablinks" (click)="tabindex=2">Grupe korisnika</button>
+  </div>
+  <section [hidden]="tabindex == 2">
+    <!--for demo wrap-->
+    <h1>Korisnici</h1>
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>Prezime</th>
+            <th>Ime</th>
+            <th>Datum rođenja</th>
+            <th>Zanimanje</th>
+            <th>Opcije</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          <tr *ngFor="let item of users">
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.dateOfBirth| date }}</td>
+            <td>{{item.occupation}}</td>
+            <td>Actions</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section [hidden]="tabindex == 1">
+    <!--for demo wrap-->
+    <h1>Grupe korisnika</h1>
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>Ime grupe</th>
+            <th>Broj korisnika u grupi</th>
+            <th>Akcije</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          <tr *ngFor="let item of groups">
+            <td>{{item.groupName}}</td>
+            <td>{{item.numberOfUsers}}</td>
+            <td>
+              <button class="btn btn-outline-primary mb-2 mr-2" (click)="openLg()">Large modal</button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

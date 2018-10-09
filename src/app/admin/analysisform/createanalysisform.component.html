@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Create analysis form</h1>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="selectApplication" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      Select application
+    </button>
+    <div class="dropdown-menu" aria-labelledby="selectApplication">
+      <a *ngFor="let item of applications" class="dropdown-item" href="#">{{item}}</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="selectVersion" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      Select version
+    </button>
+    <div class="dropdown-menu" aria-labelledby="selectVersion">
+      <a *ngFor="let item of versions" class="dropdown-item" href="#">{{item}}</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="checkbox" *ngFor="let item of heuristics">
+      <label><input type="checkbox" value="">{{item}}</label>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <button type="button" class="btn btn-danger">Cancel</button>
+    <button type="button" class="btn btn-primary">Save</button>
+  </div>
+</div>

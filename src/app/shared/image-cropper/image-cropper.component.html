@@ -1,0 +1,17 @@
+<div>
+    <input type="file" (change)="fileChangeEvent($event)" />
+</div>
+
+<app-dialog #CropperDialog  closeButtonLabel="Close" submitButtonLabel="Upload" (closeEvent)="closeCropperDialog()" (submitEvent)="uploadImage()" >
+    <div header>
+        <h2>Crop image</h2>
+    </div>
+    <div content class="d-flex flex-column">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="3 / 4"
+            [resizeToWidth]="145" format="png" (imageCroppedFile)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </div>
+    <div footer>
+    </div>
+</app-dialog>
+<!-- (imageCroppedBase64)="imageCropped($event)" -->

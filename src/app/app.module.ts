@@ -1,44 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
-
-import { AppComponent } from './app.component';
-import { AnalysisComponent } from './analysis/analysis.component';
-import { AppRoutingModule } from './app.routing';
-import { AnalysisModule } from './analysis/analysis.module';
-import { HomeComponent } from './home/home.component';
-import { AdminComponent } from './admin/admin.component';
-import { AnswersComponent } from './analysis/answers/answers.component';
-import { AnalysisService } from './analysis/analysis.service';
-import { AdminService } from './admin/admin.service';
 import { HttpModule } from '@angular/http';
-import { LoginComponent } from './login/login.component';
-import { CommonModule } from '@angular/common';
-import { UsersComponent } from './users/users.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Modules
+import { AppRoutingModule } from './app.routing.module';
+import { CoreModule } from './core/core.module';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnalysisComponent,
-    HomeComponent,
-    AdminComponent,
-    AnswersComponent,
-    LoginComponent,
-    UsersComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
-    AnalysisModule,
+    CoreModule.forRoot(),
+    SharedModule,
     AppRoutingModule,
     HttpModule,
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
+    NgbModule.forRoot(),
   ],
   providers: [
-    AnalysisService,
-    AdminService
   ],
   bootstrap: [AppComponent]
 })
