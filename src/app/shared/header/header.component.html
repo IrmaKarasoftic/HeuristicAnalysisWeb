@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home']">Home</a>
+            <a class="nav-link" [routerLink]="['']">Home</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/analysis']">Analiza</a>
+            <a class="nav-link" [routerLink]="['/dashboard']">Analiza</a>
         </li>
         
         <li class="nav-item dropdown">
@@ -18,8 +18,10 @@
               Admin panel
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="../admin/">Applications</a>
-              <a class="dropdown-item" href="../users">Users</a>
+              <a class="dropdown-item" [routerLink]="['/admin/applications']">Applications</a>
+              <a class="dropdown-item" [routerLink]="['/admin/heuristics']">Heuristics</a>
+              <a class="dropdown-item" [routerLink]="['/admin/create-analysis']">Create analysis form</a>
+              <a class="dropdown-item" [routerLink]="['/admin/users']">Users</a>
             </div>
           </li>
       </ul>

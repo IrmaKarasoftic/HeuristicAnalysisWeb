@@ -4,12 +4,13 @@ import { AdminComponent } from './admin.component';
 import { CreateAnalysisFormComponent } from './analysisform/createanalysisform.component';
 import { HeuristicsComponent } from './heuristicsmanager/heuristicsmanager.component';
 import { UsersComponent } from './users/users.component';
+import { ApplicationComponent } from './application/application.component';
 
 const routes: Routes = [
   {
-    path: '', component: UsersComponent,
+    path: '', component: AdminComponent,
     children: [
-      { path: '', component: AdminComponent },
+      { path: 'applications', component: ApplicationComponent },
       { path: 'create-analysis', component: CreateAnalysisFormComponent },
       { path: 'heuristics', component: HeuristicsComponent },
       { path: 'users', component: UsersComponent },

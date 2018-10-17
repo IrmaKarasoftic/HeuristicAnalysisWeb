@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     CoreModule.forRoot(),
     SharedModule,
+    RouterModule,
     AppRoutingModule,
     HttpModule,
     HttpClientModule,

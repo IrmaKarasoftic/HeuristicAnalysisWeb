@@ -1,0 +1,50 @@
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="{{item.Name}}" *ngFor="let item of applications">
+    <ng-template ngbPanelContent>
+      <h4>{{item.Url}}</h4>
+
+      <table class="table">
+        <thead>
+          <th scope="col">Version name</th>
+          <th scope="col">Version date</th>
+          <th scope="col">Actions</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let version of item.Versions">
+            <td>{{version.VersionName}}</td>
+            <td>{{version.Date | date}}</td>
+            <td>
+                <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateVersionDialog(version)">Update</button>
+                <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteVersionDialog(version)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<app-dialog #UpdateVersionDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateVersionDialog()"
+    (submitEvent)="updateVersion()">
+    <div header>
+        <h2>Update Version</h2>
+    </div>
+    <div content class="d-flex flex-column">
+        <input type="text" id="" [(ngModel)]="selectedVersion.VersionName">
+    </div>
+    <div footer>
+    </div>
+</app-dialog>
+
+
+<app-dialog #DeleteVersionDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteVersionDialog()"
+    (submitEvent)="deleteVersion()">
+    <div header>
+        <h2>Delete Version</h2>
+    </div>
+    <div content class="d-flex flex-column">
+        <p>Are you sure you want to delete this version?</p>
+    </div>
+    <div footer>
+    </div>
+</app-dialog>

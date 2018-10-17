@@ -8,8 +8,9 @@ const routes: Routes = [
     },
     {
         path: 'dashboard', canActivate: [],
-        loadChildren: './analysis/analysis.module#AnalysisModule'
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
     },
+    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

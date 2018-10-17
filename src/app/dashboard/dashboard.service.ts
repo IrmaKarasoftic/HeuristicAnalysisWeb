@@ -5,4 +5,8 @@ import { Http } from '@angular/http';
 export class AdminService {
 
   constructor(private http: Http) { }
+
+  getApps() {
+    return this.http.get('http://localhost:52451/api/Applications');
+  }
 }

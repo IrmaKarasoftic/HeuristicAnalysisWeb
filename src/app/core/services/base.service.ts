@@ -14,15 +14,15 @@ export abstract class BaseService extends UnsubscribeOnDestroy {
 
     constructor(http: HttpClient) {
         super();
-        this._url = environment.apiUrl;
+        this._url = 'http://localhost:52451/api/';
         this._headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         this._http = http;
     }
 
     protected buildUrl(url: string, id: string = null) {
-        // if (id) {
-        //     return `${this._url}${url}/${String(id)}`;
-        // }
+        if (id) {
+            return `${this._url}${url}/${String(id)}`;
+        }
         return this._url + url;
     }
 
@@ -51,8 +51,8 @@ export abstract class BaseService extends UnsubscribeOnDestroy {
         return this._url + url;
     }
 
-    public getAll(): Observable<any> {
-        const url = 'http://localhost:52451/api/User';
+    public getAll(entityUrl: string): Observable<any> {
+        const url = 'http://localhost:52451/api/' + entityUrl;
         return this._http.get(url, { headers: this._headers }).pipe(catchError(this.handleError));
     }
 

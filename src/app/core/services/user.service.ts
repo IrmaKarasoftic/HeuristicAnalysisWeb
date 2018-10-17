@@ -21,14 +21,10 @@ export class UserService extends BaseService {
     }
 
     searchUsers() {
-        return this.getAll();
+        return this.getAll('User');
     }
 
-    get busy(): boolean {
-        return this.userBusy;
-    }
-
-    set busy(val: boolean) {
-        this.userBusy = val;
+    searchGroups() {
+        return this.getAll('UserGroups');
     }
 }
