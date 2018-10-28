@@ -6,10 +6,10 @@ import { CoreModule } from '../core/core.module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { AnswersComponent } from './analysis/answers/answers.component';
 
 @NgModule({
     imports: [
-        AnalysisComponent,
         CommonModule,
         CoreModule,
         RouterModule,
@@ -18,7 +18,8 @@ import { AnalysisComponent } from './analysis/analysis.component';
     ],
     declarations: [
         DashboardComponent,
-        AnalysisComponent
+        AnalysisComponent,
+        AnswersComponent
     ],
     providers: [
     ]

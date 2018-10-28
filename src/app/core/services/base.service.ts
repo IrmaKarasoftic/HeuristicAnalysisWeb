@@ -19,7 +19,7 @@ export abstract class BaseService extends UnsubscribeOnDestroy {
         this._http = http;
     }
 
-    protected buildUrl(url: string, id: string = null) {
+    protected buildUrl(url: string, id: number = null) {
         if (id) {
             return `${this._url}${url}/${String(id)}`;
         }
@@ -56,7 +56,7 @@ export abstract class BaseService extends UnsubscribeOnDestroy {
         return this._http.get(url, { headers: this._headers }).pipe(catchError(this.handleError));
     }
 
-    public get(url: string, id: string): Observable<any> {
+    public get(url: string, id: number): Observable<any> {
         url = this.buildUrl(url, id);
         return this._http.get(url, { headers: this._headers }).pipe(catchError(this.handleError));
     }
@@ -71,7 +71,7 @@ export abstract class BaseService extends UnsubscribeOnDestroy {
         return this._http.post(url, data, { headers: this._headers }).pipe(catchError(this.handleError));
     }
 
-    public update(url: string, id: string, data: any): Observable<any> {
+    public update(url: string, id: number, data: any): Observable<any> {
         url = this.buildUrl(url, id);
         return this._http.put(url, data, { headers: this._headers }).pipe(catchError(this.handleError));
     }

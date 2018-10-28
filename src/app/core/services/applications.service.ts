@@ -13,12 +13,28 @@ export class ApplicationsService extends BaseService {
         return this.getAll('Applications');
     }
 
-    updateApplications(application: any) {
+    createApplication(application: any) {
+        return this.insert('Applications', application);
+    }
+
+    updateApplication(application: any) {
         return this.update('Applications', application.Id, application);
     }
 
     deleteApplications(id: number) {
         return this.delete('Applications', id);
+    }
+
+    createVersion(application: any) {
+        return this.insert('Versions', application);
+    }
+
+    updateVersion(application: any) {
+        return this.update('Versions', application.Id, application);
+    }
+
+    deleteVersion(id: number) {
+        return this.delete('Versions', id);
     }
 
 }

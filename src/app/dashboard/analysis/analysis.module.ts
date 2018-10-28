@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AnalysisRoutingModule } from './analysis-routing.module';
 import { AnalysisComponent } from './analysis.component';
-import { AnswersComponent } from './answers/answers.component';
 import { CoreModule } from '../../core/core.module';
 const routes: Routes = [
     {
@@ -23,7 +22,6 @@ const routes: Routes = [
         NgbModule
     ],
     declarations: [
-        AnalysisComponent,
-        AnswersComponent]
+    ]
 })
 export class AnalysisModule { }

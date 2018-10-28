@@ -8,21 +8,29 @@ import { HeuristicService } from '../../core/services/heuristics.service';
   styleUrls: ['./heuristicsmanager.component.css']
 })
 export class HeuristicsComponent implements OnInit {
+  @ViewChild('CreateHeuristicDialog') public createHeuristicDialog: DialogComponent;
   @ViewChild('UpdateHeuristicDialog') public updateHeuristicDialog: DialogComponent;
   @ViewChild('DeleteHeuristicDialog') public deleteHeuristicDialog: DialogComponent;
-  selectedHeuristic: any;
   constructor(private heuristicService: HeuristicService) { }
   defaultSelectedHeuristic: any = {
     Id: null,
     HeuristicText: ''
   };
+  selectedHeuristic: any = {
+    Id: null,
+    HeuristicText: ''
+  };
   public heuristics: Array<string> = [];
   ngOnInit() {
+    this.getAll();
+  }
+
+  getAll() {
     this.heuristicService.searchHeuristics()
       .subscribe(
         (res) => {
           this.heuristics = res;
-          this.selectedHeuristic = this.defaultSelectedHeuristic;
+          this.setSelectedHeuristicToDefault()
         },
         (err: any) => {
           if (err.errors) {
@@ -34,10 +42,15 @@ export class HeuristicsComponent implements OnInit {
       );
   }
 
-  updateHeuristic() {
-    this.heuristicService.updateHeuristic(this.selectedHeuristic).subscribe(
+  setSelectedHeuristicToDefault(): any {
+    this.selectedHeuristic = JSON.parse(JSON.stringify(this.defaultSelectedHeuristic));
+  }
+  
+  createHeuristic() {
+    this.heuristicService.createHeuristic(this.selectedHeuristic).subscribe(
       (res) => {
-        this.updateHeuristicDialog.hide();
+        this.getAll();
+        this.closeCreateHeuristicDialog();        
       },
       (err: any) => {
         if (err.errors) {
@@ -45,8 +58,25 @@ export class HeuristicsComponent implements OnInit {
         } else if (err.hasError) {
           console.log(err.message);
         }
-        this.updateHeuristicDialog.hide();
+        this.closeCreateHeuristicDialog();        
+      }
+    );
+  }
 
+
+  updateHeuristic() {
+    this.heuristicService.updateHeuristic(this.selectedHeuristic).subscribe(
+      (res) => {
+        this.getAll();
+        this.closeUpdateHeuristicDialog();
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+        this.closeUpdateHeuristicDialog();
       }
     );
   }
@@ -54,7 +84,8 @@ export class HeuristicsComponent implements OnInit {
   deleteHeuristic() {
     this.heuristicService.deleteHeuristic(this.selectedHeuristic.Id).subscribe(
       (res) => {
-        this.updateHeuristicDialog.hide();
+        this.getAll();
+        this.closeDeleteHeuristicDialog();
       },
       (err: any) => {
         if (err.errors) {
@@ -62,19 +93,19 @@ export class HeuristicsComponent implements OnInit {
         } else if (err.hasError) {
           console.log(err.message);
         }
-        this.updateHeuristicDialog.hide();
+        this.closeDeleteHeuristicDialog();
       }
     );
   }
 
-  openUpdateHeuristicDialog(heuristic: any) {
-    this.selectedHeuristic = heuristic;
-    this.updateHeuristicDialog.show();
+  openCreateHeuristicDialog() {
+    this.setSelectedHeuristicToDefault()
+    this.createHeuristicDialog.show();
   }
 
-  closeUpdateHeuristicDialog() {
-    this.updateHeuristicDialog.hide();
-    this.selectedHeuristic = this.defaultSelectedHeuristic;
+  openUpdateHeuristicDialog(heuristic: any) {
+    this.selectedHeuristic = JSON.parse(JSON.stringify(heuristic));
+    this.updateHeuristicDialog.show();
   }
 
   openDeleteHeuristicDialog(heuristic) {
@@ -82,8 +113,18 @@ export class HeuristicsComponent implements OnInit {
     this.deleteHeuristicDialog.show();
   }
 
+  closeCreateHeuristicDialog() {
+    this.createHeuristicDialog.hide();
+    this.setSelectedHeuristicToDefault()
+  }
+
+  closeUpdateHeuristicDialog() {
+    this.updateHeuristicDialog.hide();
+    this.setSelectedHeuristicToDefault()
+  }
+
   closeDeleteHeuristicDialog() {
     this.deleteHeuristicDialog.hide();
-    this.selectedHeuristic = this.defaultSelectedHeuristic;
+    this.setSelectedHeuristicToDefault()
   }
 }

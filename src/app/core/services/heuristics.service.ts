@@ -17,6 +17,10 @@ export class HeuristicService extends BaseService {
         return this.getAll('Heuristics');
     }
 
+    createHeuristic(heuristic: any) {
+        return this.insert('Heuristics', heuristic);
+    }
+
     updateHeuristic(heuristic: any) {
         return this.update('Heuristics', heuristic.Id, heuristic);
     }

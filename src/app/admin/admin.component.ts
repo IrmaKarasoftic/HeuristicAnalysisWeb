@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from './admin.service';
 import { Application } from './application';
 
 @Component({

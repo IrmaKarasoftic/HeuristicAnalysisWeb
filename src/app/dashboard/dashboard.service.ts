@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Injectable()
-export class AdminService {
+export class DashboardService {
 
   constructor(private http: Http) { }
 

@@ -5,6 +5,8 @@ import { UserService } from './services/user.service';
 import { HeuristicService } from './services/heuristics.service';
 import { ApplicationsService } from './services/applications.service';
 import { VersionsService } from './services/versions.service';
+import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { CustomDatePickerAdapter } from './common/custom-datepicker-adapter';
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ export class CoreModule {
         HeuristicService,
         ApplicationsService,
         ImageUploadService,
-        VersionsService
+        VersionsService,
+        {provide: NgbDateAdapter, useClass: CustomDatePickerAdapter},
       ]
     };
   }

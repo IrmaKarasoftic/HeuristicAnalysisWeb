@@ -10,15 +10,36 @@ import { VersionsService } from '../../core/services/versions.service';
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent implements OnInit {
+  @ViewChild('CreateVersionDialog') public createVersionDialog: DialogComponent;
   @ViewChild('UpdateVersionDialog') public updateVersionDialog: DialogComponent;
   @ViewChild('DeleteVersionDialog') public deleteVersionDialog: DialogComponent;
+  @ViewChild('CreateApplicationDialog') public createApplicationDialog: DialogComponent;
+  @ViewChild('UpdateApplicationDialog') public updateApplicationDialog: DialogComponent;
+  @ViewChild('DeleteApplicationDialog') public deleteApplicationDialog: DialogComponent;
+
   defaultSelectedVersion: any = {
     Id: null,
     VersionName: '',
-    Date: new Date()
+    Date: new Date(),
+    ApplicationId: null
   };
   applications: Application[] = [];
-  selectedVersion: any;
+  selectedVersion: any = {
+    Id: null,
+    VersionName: '',
+    Date: new Date(),
+    ApplicationId: null
+  };
+  selectedApplication: any = {
+    Id: null,
+    Name: '',
+    Url: ''
+  };
+  defaultSelectedApplication: any = {
+    Id: null,
+    Name: '',
+    Url: ''
+  };
 
   constructor(private applicationService: ApplicationsService,
     private versionService: VersionsService) { }
@@ -44,10 +65,80 @@ export class ApplicationComponent implements OnInit {
       );
   }
 
+  createApplication() {
+    this.applicationService.createApplication(this.selectedApplication).subscribe(
+      (res) => {
+        this.getAllApps();
+        this.closeCreateApplicationDialog();        
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+        this.closeCreateApplicationDialog();        
+      }
+    );
+  }
+
+  createVersion() {
+    this.selectedVersion.ApplicationId = this.selectedApplication.Id;
+    this.applicationService.createVersion(this.selectedVersion).subscribe(
+      (res) => {
+        this.getAllApps();
+        this.closeCreateVersionDialog();        
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+        this.closeCreateVersionDialog();        
+      }
+    );
+  }
+
+  updateApplication() {
+    this.applicationService.updateApplication(this.selectedApplication).subscribe(
+      (res) => {
+        this.getAllApps();
+        this.closeUpdateApplicationDialog();
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+        this.closeUpdateApplicationDialog();
+      }
+    );
+  }
+
+  deleteApplication() {
+    this.applicationService.deleteApplications(this.selectedApplication.Id).subscribe(
+      (res) => {
+        this.getAllApps();
+        this.closeDeleteApplicationDialog();
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+        this.closeDeleteApplicationDialog();
+      }
+    );
+  }
+
 
   updateVersion() {
     this.versionService.updateVersion(this.selectedVersion).subscribe(
       (res) => {
+        this.getAllApps();
         this.updateVersionDialog.hide();
       },
       (err: any) => {
@@ -65,6 +156,7 @@ export class ApplicationComponent implements OnInit {
   deleteVersion() {
     this.versionService.deleteVersion(this.selectedVersion.Id).subscribe(
       (res) => {
+        this.getAllApps();
         this.updateVersionDialog.hide();
       },
       (err: any) => {
@@ -76,6 +168,53 @@ export class ApplicationComponent implements OnInit {
         this.updateVersionDialog.hide();
       }
     );
+  }
+  setSelectedApplicationToDefault(): any {
+    this.selectedApplication = JSON.parse(JSON.stringify(this.defaultSelectedApplication));
+  }
+
+  setSelectedVersionToDefault(): any {
+    this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
+  }
+
+  openCreateApplicationDialog() {
+    this.setSelectedApplicationToDefault()
+    this.createApplicationDialog.show();
+  }
+
+  openUpdateApplicationDialog(application: any) {
+    this.selectedApplication = JSON.parse(JSON.stringify(application));
+    this.updateApplicationDialog.show();
+  }
+
+  openDeleteApplicationDialog(application) {
+    this.selectedApplication = application;
+    this.deleteApplicationDialog.show();
+  }
+
+  openCreateVersionDialog(application) {
+    this.selectedApplication = application;
+    this.setSelectedVersionToDefault()
+    this.createVersionDialog.show();
+  }
+
+  closeCreateVersionDialog() {
+    this.createVersionDialog.hide();
+    this.setSelectedVersionToDefault()
+  }
+
+  closeUpdateApplicationDialog() {
+    this.selectedApplication.hide();
+    this.setSelectedApplicationToDefault()
+  }
+
+  closeDeleteApplicationDialog() {
+    this.selectedApplication.hide();
+    this.setSelectedApplicationToDefault()
+  }
+  closeCreateApplicationDialog() {
+    this.createApplicationDialog.hide();
+    this.setSelectedApplicationToDefault()
   }
 
   openUpdateVersionDialog(version: any) {

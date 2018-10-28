@@ -25,6 +25,38 @@ export class UserService extends BaseService {
     }
 
     searchGroups() {
-        return this.getAll('UserGroups');
+        return this.getAll('Groups');
+    }
+
+    createUser(user: any) {
+        return this.insert('User', user);
+    }
+
+    updateUser(user: any) {
+        return this.update('User', user.Id, user);
+    }
+
+    deleteUser(id: number) {
+        return this.delete('User', id);
+    }
+
+    createUserGroup(group: any) {
+        return this.insert('Groups', group);
+    }
+
+    updateUserGroup(group: any) {
+        return this.update('Groups', group.Id, group);
+    }
+
+    deleteUserGroup(id: number) {
+        return this.delete('Groups', id);
+    }
+
+    getUsersForGroups(id: number) {
+        return this.get('Groups/users', id);
+    }
+
+    assignUser(user) {
+        return this.insert('Groups/assign', user);
     }
 }

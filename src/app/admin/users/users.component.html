@@ -1,16 +1,16 @@
 <div class="container">
   <ngb-tabset>
-    <ngb-tab title="Korisnici">
+    <ngb-tab title="Users">
       <ng-template ngbTabContent>
-
+        <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateUserDialog()">Add</button>
         <table>
           <thead>
             <tr>
-              <th>Prezime</th>
-              <th>Ime</th>
-              <th>Datum rođenja</th>
-              <th>Zanimanje</th>
-              <th>Opcije</th>
+              <th>Last name</th>
+              <th>First name</th>
+              <th>Date of birth</th>
+              <th>Occupation</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>
@@ -20,8 +20,8 @@
               <td>{{item.DateOfBirth| date }}</td>
               <td>{{item.Occupation}}</td>
               <td>
-                <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateUserDialog()">Update</button>
-                <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteUserDialog()">Delete</button>
+                <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateUserDialog(item)">Update</button>
+                <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteUserDialog(item)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -29,9 +29,9 @@
       </ng-template>
 
     </ngb-tab>
-    <ngb-tab title="Grupe korisnika">
+    <ngb-tab title="User Groups">
       <ng-template ngbTabContent>
-
+        <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateUserGroupDialog()">Add</button>
         <table>
           <thead>
             <tr>
@@ -45,7 +45,10 @@
               <td>{{item.GroupName}}</td>
               <td>{{item.NumberOfUsers}}</td>
               <td>
-                <button class="btn btn-outline-primary mb-2 mr-2" (click)="openManageUsersDialog()">Manage users</button>
+                <button class="btn btn-outline-primary mb-2 mr-2" (click)="openUpdateUserGroupDialog(item)">Edit group</button>
+                <button class="btn btn-outline-primary mb-2 mr-2" (click)="openManageUsersDialog(item)">Manage users</button>
+                <button class="btn btn-outline-primary mb-2 mr-2" (click)="openDeleteUserGroupDialog(item)">Delete
+                  Group</button>
               </td>
             </tr>
           </tbody>
@@ -58,6 +61,25 @@
 
 </div>
 
+<app-dialog #CreateUserDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateUserDialog()"
+  (submitEvent)="createUser()">
+  <div header>
+    <h2>Create user</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <label>First name</label>
+    <input type="text" id="firstName" [(ngModel)]="selectedUser.FirstName">
+    <label>Last name</label>
+    <input type="text" id="lastName" [(ngModel)]="selectedUser.LastName">
+    <label>Occupation</label>
+    <input type="text" id="occupation" [(ngModel)]="selectedUser.Occupation">
+    <label>Date of birth</label>
+    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="selectedUser.DateOfBirth"
+      ngbDatepicker #d="ngbDatepicker">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
 
 <app-dialog #UpdateUserDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateUserDialog()"
   (submitEvent)="updateUser()">
@@ -65,14 +87,22 @@
     <h2>Update user</h2>
   </div>
   <div content class="d-flex flex-column">
-    <p>test</p>
+    <label>First name</label>
+    <input type="text" id="firstName" [(ngModel)]="selectedUser.FirstName">
+    <label>Last name</label>
+    <input type="text" id="lastName" [(ngModel)]="selectedUser.LastName">
+    <label>Occupation</label>
+    <input type="text" id="occupation" [(ngModel)]="selectedUser.Occupation">
+    <label>Date of birth</label>
+    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d1.toggle()" name="dp2" [(ngModel)]="selectedUser.DateOfBirth"
+      ngbDatepicker #d1="ngbDatepicker">
   </div>
   <div footer>
   </div>
 </app-dialog>
 
 
-<app-dialog #DeleteUserDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeDeleteUserDialog()"
+<app-dialog #DeleteUserDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteUserDialog()"
   (submitEvent)="deleteUser()">
   <div header>
     <h2>Delete user</h2>
@@ -89,6 +119,63 @@
   (submitEvent)="updateUser()">
   <div header>
     <h2>Manage users</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <label>Search</label>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="userFilter.Name"/>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date of birth</th>
+          <th>Occupation</th>
+          <th>Assigned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let user of groupUsers.Users | filterBy: userFilter'>
+          <td>{{user.Name}}</td>
+          <td>{{user.DateOfBirth}}</td>
+          <td>{{user.Occupation}}</td>
+          <td>
+            <i class="fa fa-check" (click)='deassign(user)' *ngIf='user.Assigned'></i>
+            <i class="fa fa-times-circle" (click)='assign(user)' *ngIf='!user.Assigned'></i>
+          </td>
+      </tbody>
+    </table>
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #CreateUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateUserGroupDialog()"
+  (submitEvent)="createUserGroup()">
+  <div header>
+    <h2>Create user group</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <input type="text" id="groupName" [(ngModel)]="selectedUserGroup.GroupName">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #UpdateUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeCreateUserGroupDialog()"
+  (submitEvent)="updateUserGroup()">
+  <div header>
+    <h2>Update user group</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <input type="text" id="groupName" [(ngModel)]="selectedUserGroup.GroupName">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #DeleteUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteUserGroupDialog()"
+  (submitEvent)="deleteUserGroup()">
+  <div header>
+    <h2>Delete user group</h2>
   </div>
   <div content class="d-flex flex-column">
     <p>test</p>

@@ -1,8 +1,8 @@
+<button class="btn btn-secondary btn-manage" type="button" (click)="openCreateApplicationDialog()">Add</button>
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="{{item.Name}}" *ngFor="let item of applications">
     <ng-template ngbPanelContent>
       <h4>{{item.Url}}</h4>
-
       <table class="table">
         <thead>
           <th scope="col">Version name</th>
@@ -10,12 +10,13 @@
           <th scope="col">Actions</th>
         </thead>
         <tbody>
+          <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateVersionDialog(item)">Add</button>
           <tr *ngFor="let version of item.Versions">
             <td>{{version.VersionName}}</td>
             <td>{{version.Date | date}}</td>
             <td>
-                <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateVersionDialog(version)">Update</button>
-                <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteVersionDialog(version)">Delete</button>
+              <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateVersionDialog(version)">Update</button>
+              <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteVersionDialog(version)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -24,27 +25,84 @@
   </ngb-panel>
 </ngb-accordion>
 
-<app-dialog #UpdateVersionDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateVersionDialog()"
-    (submitEvent)="updateVersion()">
-    <div header>
-        <h2>Update Version</h2>
-    </div>
-    <div content class="d-flex flex-column">
-        <input type="text" id="" [(ngModel)]="selectedVersion.VersionName">
-    </div>
-    <div footer>
-    </div>
+<app-dialog #CreateApplicationDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateApplicationDialog()"
+  (submitEvent)="createApplication()">
+  <div header>
+    <h2>Create application</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <label>Name</label>
+    <input type="text" id="" [(ngModel)]="selectedApplication.Name">
+    <label>Url</label>
+    <input type="text" id="" [(ngModel)]="selectedApplication.Url">
+  </div>
+  <div footer>
+  </div>
 </app-dialog>
 
+<app-dialog #UpdateApplicationDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateApplicationDialog()"
+  (submitEvent)="updateApplication()">
+  <div header>
+    <h2>Update application</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <label>Name</label>
+    <input type="text" id="" [(ngModel)]="selectedApplication.Name">
+    <label>Url</label>
+    <input type="text" id="" [(ngModel)]="selectedApplication.Url">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #DeleteApplicationDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteApplicationDialog()"
+  (submitEvent)="deleteApplication()">
+  <div header>
+    <h2>Delete application</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <p>Delete</p>
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #CreateVersionDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateVersionDialog()"
+  (submitEvent)="createVersion()">
+  <div header>
+    <h2>Create version</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <label>Version Name</label>
+    <input type="text" id="" [(ngModel)]="selectedVersion.VersionName">
+    <label>Date</label>
+    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="selectedVersion.Date"
+    ngbDatepicker #d="ngbDatepicker">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
+<app-dialog #UpdateVersionDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateVersionDialog()"
+  (submitEvent)="updateVersion()">
+  <div header>
+    <h2>Update Version</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <input type="text" id="" [(ngModel)]="selectedVersion.VersionName">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
 
 <app-dialog #DeleteVersionDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteVersionDialog()"
-    (submitEvent)="deleteVersion()">
-    <div header>
-        <h2>Delete Version</h2>
-    </div>
-    <div content class="d-flex flex-column">
-        <p>Are you sure you want to delete this version?</p>
-    </div>
-    <div footer>
-    </div>
+  (submitEvent)="deleteVersion()">
+  <div header>
+    <h2>Delete Version</h2>
+  </div>
+  <div content class="d-flex flex-column">
+    <p>Are you sure you want to delete this version?</p>
+  </div>
+  <div footer>
+  </div>
 </app-dialog>
