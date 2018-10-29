@@ -23,13 +23,13 @@ export class ApplicationComponent implements OnInit {
     Date: new Date(),
     ApplicationId: null
   };
-  applications: Application[] = [];
   selectedVersion: any = {
     Id: null,
     VersionName: '',
     Date: new Date(),
     ApplicationId: null
   };
+  applications: Application[] = [];
   selectedApplication: any = {
     Id: null,
     Name: '',
@@ -53,7 +53,7 @@ export class ApplicationComponent implements OnInit {
       .subscribe(
         (res) => {
           this.applications = res;
-          this.selectedVersion = this.defaultSelectedVersion;
+          this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
         },
         (err: any) => {
           if (err.errors) {
@@ -69,7 +69,7 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.createApplication(this.selectedApplication).subscribe(
       (res) => {
         this.getAllApps();
-        this.closeCreateApplicationDialog();        
+        this.closeCreateApplicationDialog();
       },
       (err: any) => {
         if (err.errors) {
@@ -77,7 +77,7 @@ export class ApplicationComponent implements OnInit {
         } else if (err.hasError) {
           console.log(err.message);
         }
-        this.closeCreateApplicationDialog();        
+        this.closeCreateApplicationDialog();
       }
     );
   }
@@ -87,7 +87,7 @@ export class ApplicationComponent implements OnInit {
     this.applicationService.createVersion(this.selectedVersion).subscribe(
       (res) => {
         this.getAllApps();
-        this.closeCreateVersionDialog();        
+        this.closeCreateVersionDialog();
       },
       (err: any) => {
         if (err.errors) {
@@ -95,7 +95,7 @@ export class ApplicationComponent implements OnInit {
         } else if (err.hasError) {
           console.log(err.message);
         }
-        this.closeCreateVersionDialog();        
+        this.closeCreateVersionDialog();
       }
     );
   }
@@ -218,22 +218,22 @@ export class ApplicationComponent implements OnInit {
   }
 
   openUpdateVersionDialog(version: any) {
-    this.selectedVersion = version;
+    this.selectedVersion = JSON.parse(JSON.stringify(version));
     this.updateVersionDialog.show();
   }
 
   closeUpdateVersionDialog() {
-    this.selectedVersion = this.defaultSelectedVersion;
+    this.setSelectedVersionToDefault();
     this.updateVersionDialog.hide();
   }
 
   openDeleteVersionDialog(version) {
-    this.selectedVersion = version;
+    this.selectedVersion = JSON.parse(JSON.stringify(version));
     this.deleteVersionDialog.show();
   }
 
   closeDeleteVersionDialog() {
     this.deleteVersionDialog.hide();
-    this.selectedVersion = this.defaultSelectedVersion;
+    this.setSelectedVersionToDefault();
   }
 }

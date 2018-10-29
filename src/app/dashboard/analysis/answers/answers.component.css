@@ -29,3 +29,8 @@
 .dodajOdgovor {
     margin: 10px;
 }
+
+.uploadedImage {
+    min-height: 40px;
+    border: 1px solid #a9a9a9;
+}

@@ -34,7 +34,12 @@
         <div class="odgovor opisProblema">
           <textarea rows='3'></textarea>
         </div>
-        <br>
+      </ul>
+      <ul class="list-group-item pitanjeOdgovor">
+        <div class="pitanje">Slika</div>
+        <div class="odgovor opisProblema uploadedImage" (paste)="pastePicture($event)">
+          <img [src]="item" class="image" *ngFor='let item of pastedImages' style="height: 300px; width: 300px; background-color:#ccc;" alt="">
+        </div>
       </ul>
       <hr>
     </div>

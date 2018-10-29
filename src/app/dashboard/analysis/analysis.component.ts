@@ -25,7 +25,7 @@ export class AnalysisComponent implements OnInit {
   ngOnInit() {
     this.answers.push(this.a1);
   }
-  public AddAnswer() {
+  AddAnswer() {
     this.answers.push(this.default);
   }
 

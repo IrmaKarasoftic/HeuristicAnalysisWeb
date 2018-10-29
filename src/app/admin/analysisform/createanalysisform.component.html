@@ -1,30 +1,23 @@
 <div class="container">
   <h1>Create analysis form</h1>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="selectApplication" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">
-      Select application
-    </button>
-    <div class="dropdown-menu" aria-labelledby="selectApplication">
-      <a *ngFor="let item of applications" class="dropdown-item" href="#">{{item}}</a>
-    </div>
+  <select name="selectApp" class="d-flex flex-fill" [(ngModel)]="selectedApp" (ngModelChange)="onAppSelect($event)">
+    <option *ngFor="let app of applications" [value]="app.Id">{{app.Name}}</option>
+  </select>
+  <select name="selectVersion" class="d-flex flex-fill" [(ngModel)]="selectedVersion" (ngModelChange)="onVersionSelect($event)">
+    <option *ngFor="let item of appVersions" [value]="item.Id">{{item.VersionName}}</option>
+  </select>
+  <h2>Heuristics</h2>
+  <div class="form-check" *ngFor="let heuristic of heuristics">
+    <label>
+      <input type="checkbox" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
+    </label>
   </div>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="selectVersion" data-toggle="dropdown" aria-haspopup="true"
-      aria-expanded="false">
-      Select version
-    </button>
-    <div class="dropdown-menu" aria-labelledby="selectVersion">
-      <a *ngFor="let item of versions" class="dropdown-item" href="#">{{item}}</a>
-    </div>
+  <h1>Assign users</h1>
+  <div class="form-check" *ngFor="let group of groups">
+    <label>
+      <input type="checkbox" name="check"> <span class="label-text">{{group.GroupName}}</span>
+    </label>
   </div>
-
-  <div>
-    <div class="checkbox" *ngFor="let item of heuristics">
-      <label><input type="checkbox" value="">{{item}}</label>
-    </div>
-  </div>
-
   <div class="pull-right">
     <button type="button" class="btn btn-danger">Cancel</button>
     <button type="button" class="btn btn-primary">Save</button>
