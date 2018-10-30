@@ -33,4 +33,46 @@
 .uploadedImage {
     min-height: 40px;
     border: 1px solid #a9a9a9;
+    
+}
+.odgovor:focus {
+    border: 10px solid pink;
+}
+
+.image-container {
+	position: relative;
+    display: inline-block;
+    margin: 10px;
+    vertical-align: bottom;
+    text-align: center;
+}
+    
+.image {
+    display: block;
+    width: 300px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: black;
+}
+
+.overlay.images-button {
+    text-align: center;
+}
+.overlay.images-button a {
+    padding: 5px 5px;
+    color: white;
+    display: inline-block;
+    margin: 60px 10px;
+}
+
+.image-container:hover .overlay {
+	opacity: 0.7;
 }

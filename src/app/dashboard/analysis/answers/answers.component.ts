@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-answers',
@@ -9,7 +10,10 @@ export class AnswersComponent implements OnInit {
   image: File;
   imageSrc: string | ArrayBuffer;
   pastedImages: Array<string> = [];
-  constructor() { }
+  @ViewChild('fileInput') fileInput;
+  formData: any;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -25,10 +29,42 @@ export class AnswersComponent implements OnInit {
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = e => {
-      this.imageSrc = reader.result;
-      this.pastedImages.push(this.imageSrc.toString());
+        this.imageSrc = reader.result;
+        this.pastedImages.push(this.imageSrc.toString());
       }
     }
   }
 
+  onFileChange(event) {
+    if (event.target.files && event.target.files.length > 0) {
+      for (const file of event.target.files) {
+        this.getBase64(file);
+      }
+    }
+  }
+
+  removeFileFromCollection(file: string) {
+    const index = this.pastedImages.indexOf(file);
+    if (index >= 0) {
+      this.pastedImages.splice(index, 1);
+    }
+  }
+
+  clearFileInput() {
+    this.fileInput.nativeElement.value = '';
+  }
+
+  uploadImage() {
+    return this.http.post('http://localhost:52451/api/Image', this.pastedImages).subscribe(
+      (res) => {
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+      }
+    );
+  }
 }
