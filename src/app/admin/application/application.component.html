@@ -1,3 +1,4 @@
+<h1>Applications Manager</h1>
 <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateApplicationDialog()">Add</button>
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="{{item.Name}}" *ngFor="let item of applications">
@@ -7,6 +8,7 @@
         <thead>
           <th scope="col">Version name</th>
           <th scope="col">Version date</th>
+          <th></th>
           <th scope="col">Actions</th>
         </thead>
         <tbody>
@@ -14,6 +16,9 @@
           <tr *ngFor="let version of item.Versions">
             <td>{{version.VersionName}}</td>
             <td>{{version.Date | date}}</td>
+            <td>
+              <a (click)="openAnalysisDetailsDialog(version)">View analysis form</a>
+            </td>
             <td>
               <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateVersionDialog(version)">Update</button>
               <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteVersionDialog(version)">Delete</button>
@@ -24,6 +29,28 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
+
+<app-dialog #AnalysisDetails closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeAnalysisDetailsDialog()"
+  (submitEvent)="createApplication()">
+  <div header>
+    <h2>Analysis form details</h2>
+  </div>
+  <div content class="d-flex flex-column">
+      <h4>{{analysis?.ApplicationName}}</h4>
+     <h5>{{analysis?.VersionName}}</h5>
+      <h6>Heuristics</h6>
+      <div *ngFor="let heuristic of analysis?.Heuristics">
+        <p>{{heuristic}}</p>
+      </div>
+      <h6>Groups</h6>
+      <div *ngFor="let group of analysis?.Groups">
+        <p>{{group}}</p>
+      </div>
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
+
 
 <app-dialog #CreateApplicationDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateApplicationDialog()"
   (submitEvent)="createApplication()">

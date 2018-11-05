@@ -3,6 +3,7 @@ import { Application } from '../application';
 import { ApplicationsService } from '../../core/services/applications.service';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { VersionsService } from '../../core/services/versions.service';
+import { AnalysisService } from '../../core/services/analysis.service';
 
 @Component({
   selector: 'app-application',
@@ -16,6 +17,7 @@ export class ApplicationComponent implements OnInit {
   @ViewChild('CreateApplicationDialog') public createApplicationDialog: DialogComponent;
   @ViewChild('UpdateApplicationDialog') public updateApplicationDialog: DialogComponent;
   @ViewChild('DeleteApplicationDialog') public deleteApplicationDialog: DialogComponent;
+  @ViewChild('AnalysisDetails') public analysisDetailsDialog: DialogComponent;
 
   defaultSelectedVersion: any = {
     Id: null,
@@ -40,8 +42,9 @@ export class ApplicationComponent implements OnInit {
     Name: '',
     Url: ''
   };
+  analysis: any;
 
-  constructor(private applicationService: ApplicationsService,
+  constructor(private applicationService: ApplicationsService, private analysisService: AnalysisService,
     private versionService: VersionsService) { }
 
   ngOnInit() {
@@ -56,6 +59,26 @@ export class ApplicationComponent implements OnInit {
           this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
         },
         (err: any) => {
+          if (err.errors) {
+            console.log(err.errors[0]);
+          } else if (err.hasError) {
+            console.log(err.message);
+          }
+        }
+      );
+  }
+  
+
+  getAnalysisById(id) {
+    this.analysisService.getAnalysisById(id)
+      .subscribe(
+        res => {
+          if (res) {
+            this.analysis = res;
+            console.log(res.result);
+          }
+        },
+        (err) => {
           if (err.errors) {
             console.log(err.errors[0]);
           } else if (err.hasError) {
@@ -192,6 +215,11 @@ export class ApplicationComponent implements OnInit {
     this.deleteApplicationDialog.show();
   }
 
+  openAnalysisDetailsDialog(version) {
+    this.getAnalysisById(version.AnalysisId);
+    this.analysisDetailsDialog.show();
+  }
+
   openCreateVersionDialog(application) {
     this.selectedApplication = application;
     this.setSelectedVersionToDefault()
@@ -201,6 +229,11 @@ export class ApplicationComponent implements OnInit {
   closeCreateVersionDialog() {
     this.createVersionDialog.hide();
     this.setSelectedVersionToDefault()
+  }
+
+  closeAnalysisDetailsDialog() {
+    this.analysisDetailsDialog.hide();
+    this.analysis = null;
   }
 
   closeUpdateApplicationDialog() {

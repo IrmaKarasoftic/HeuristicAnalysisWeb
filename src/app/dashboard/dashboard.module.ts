@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { AnswersComponent } from './analysis/answers/answers.component';
+import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { AnswersComponent } from './analysis/answers/answers.component';
     declarations: [
         DashboardComponent,
         AnalysisComponent,
-        AnswersComponent
+        AnswersComponent,
+        AllAnalysesComponent
     ],
     providers: [
     ]

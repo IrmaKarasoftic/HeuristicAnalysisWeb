@@ -9,6 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class AnswersComponent implements OnInit {
   image: File;
   imageSrc: string | ArrayBuffer;
+  model: any = {
+    analysisId : 1,
+    images : null
+  }
   pastedImages: Array<string> = [];
   @ViewChild('fileInput') fileInput;
   formData: any;
@@ -55,7 +59,9 @@ export class AnswersComponent implements OnInit {
   }
 
   uploadImage() {
-    return this.http.post('http://localhost:52451/api/Image', this.pastedImages).subscribe(
+    const aId = 1;
+    this.model.images = this.pastedImages
+    return this.http.post('http://localhost:52451/api/Image', this.model).subscribe(
       (res) => {
       },
       (err: any) => {

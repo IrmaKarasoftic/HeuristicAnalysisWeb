@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApplicationsService } from '../../core/services/applications.service';
 import { HeuristicService } from '../../core/services/heuristics.service';
 import { UserService } from '../../core/services/user.service';
+import { AnalysisService } from '../../core/services/analysis.service';
 
 @Component({
   selector: 'app-analysis-form',
@@ -14,7 +15,14 @@ export class CreateAnalysisFormComponent implements OnInit {
   selectedVersion: any;
   groups: any;
   selectedGroup: any;
-  constructor(public applicationService: ApplicationsService, public heuristicService: HeuristicService, public userService: UserService) { }
+  createAppModel: any = {
+    appId: null,
+    versionId: null,
+    heuristics: null,
+    groups: null
+  }
+  constructor(public applicationService: ApplicationsService, public heuristicService: HeuristicService, public userService: UserService, 
+    public analysisService: AnalysisService) { }
   public applications: Array<any> = [];
   public versions: Array<any> = [];
   public heuristics: Array<any> = [];
@@ -85,5 +93,26 @@ export class CreateAnalysisFormComponent implements OnInit {
 
   onVersionSelect($event) {
     this.selectedVersion = $event;
+  }
+
+  save() {
+    this.createAppModel.appId =  this.selectedApp;
+    this.createAppModel.versionId =  this.selectedVersion;
+    this.createAppModel.heuristics = this.heuristics;
+    this.createAppModel.groups = this.groups;
+    this.analysisService.createAnalysis(this.createAppModel).subscribe(
+      (res) => {
+        this.getAllApps();
+        this.getAllHeuristics();
+        this.getAllUserGroups();
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+      }
+    );
   }
 }

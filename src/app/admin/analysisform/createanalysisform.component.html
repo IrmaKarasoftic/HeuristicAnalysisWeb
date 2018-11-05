@@ -9,17 +9,17 @@
   <h2>Heuristics</h2>
   <div class="form-check" *ngFor="let heuristic of heuristics">
     <label>
-      <input type="checkbox" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
+      <input type="checkbox" [(ngModel)]="heuristic.Checked" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
     </label>
   </div>
   <h1>Assign users</h1>
   <div class="form-check" *ngFor="let group of groups">
     <label>
-      <input type="checkbox" name="check"> <span class="label-text">{{group.GroupName}}</span>
+      <input type="checkbox"  [(ngModel)]="group.Checked" name="check"> <span class="label-text">{{group.GroupName}}</span>
     </label>
   </div>
   <div class="pull-right">
     <button type="button" class="btn btn-danger">Cancel</button>
-    <button type="button" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-primary" (click)='save()'>Save</button>
   </div>
 </div>
