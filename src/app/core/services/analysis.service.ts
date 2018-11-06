@@ -16,6 +16,10 @@ export class AnalysisService extends BaseService {
         return this.get('Analysis', id);
     }
 
+    getAnalysisByUserId(id) {
+        return this.get('Analysis/user', id);
+    }
+
     createAnalysis(analysis: any) {
         return this.insert('Analysis', analysis);
     }

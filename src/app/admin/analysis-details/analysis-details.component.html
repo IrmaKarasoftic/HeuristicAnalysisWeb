@@ -1,3 +1,19 @@
-<p>
-  analysis-details works!
-</p>
+<table class="table" *ngFor='let item of analysis'>
+  <thead>
+    <th scope="col">Application name</th>
+    <th scope="col">Application URL</th>
+    <th scope="col">Version</th>
+    <th scope="col">Actions</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td>{{item.Aplikacija.Name}}</td>
+      <td>{{item.Aplikacija.Url}}</td>
+      <td>{{item.Verzija.VersionName}}</td>
+      <td>
+        <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateVersionDialog(version)">Update</button>
+        <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteVersionDialog(version)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

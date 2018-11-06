@@ -18,5 +18,19 @@ export class AnalysisDetailsComponent extends UnsubscribeOnDestroy implements On
   }
 
   ngOnInit() {
+    this.analysisService.getAnalysisByUserId(1)
+    .subscribe(
+      (res) => {
+        this.analysis = res;
+        console.log(res);
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+      }
+    );
   }
 }
