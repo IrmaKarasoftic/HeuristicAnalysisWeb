@@ -8,6 +8,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { AnswersComponent } from './analysis/answers/answers.component';
 import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
+import { AppAnalysisComponent } from './app-analysis/app-analysis.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -15,13 +17,15 @@ import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
         CoreModule,
         RouterModule,
         DashboardRoutingModule,
-        NgbModule
+        NgbModule,
+        SharedModule,
     ],
     declarations: [
         DashboardComponent,
         AnalysisComponent,
         AnswersComponent,
-        AllAnalysesComponent
+        AllAnalysesComponent,
+        AppAnalysisComponent
     ],
     providers: [
     ]

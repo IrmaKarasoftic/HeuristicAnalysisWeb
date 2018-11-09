@@ -1,3 +1,18 @@
-<p>
-  all-analyses works!
-</p>
+<table class="table" *ngFor='let item of analysis'>
+  <thead>
+    <th scope="col">Application name</th>
+    <th scope="col">Application URL</th>
+    <th scope="col">Version</th>
+    <th scope="col">Actions</th>
+  </thead>
+  <tbody>
+    <tr>
+    <td>{{item.Aplikacija.Name}}</td>
+      <td>{{item.Aplikacija.Url}}</td>
+      <td>{{item.Verzija.VersionName}}</td>
+      <td>
+        <button class="btn btn-secondary btn-manage" type="button" [routerLink]="['/dashboard/app-analysis', item.Id]">Analyze</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

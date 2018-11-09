@@ -1,21 +1,11 @@
-<div class="container">
+<div class="col-12">
 	<div class="row">
-		<br />
-		<div class="panel panel-primary" id="QAdiv">
-			<div class="panel-heading">
-				<p> 1. Vidljivost stanja sistema Potrebno je analizirati da li korisnik u svakom momentu raspolaže adekvatnim
-					informacijama
-					o trenutnom statusu. Pitanja za analizu:
-					<br> - da li je jasno čemu služi ekran na kome se korisnik nalazi
-					<br> - da li svaka korisnička akcija rezultira adekvatnom povratnom infromacijom ili očekivanom aktivnosti u
-					aplikaciji
-					<br> - da li se poruke upozorenja prikazuju na adekvatan način i dovoljno dugo
-					<br> - da li su parametri sistema prikazani na odgovarajući način
-					<br> - da li u slučaju dužeg trajanja neke operacije u aplikaciji postoji adekvatan progers indikator
-				</p>
-			</div>
-			<!--.panel-heading-->
-			<app-answers *ngFor="let item of answers"></app-answers>
-		</div>
+		<h4>{{HeuristicTitle}}</h4>
 	</div>
+	<br>
+	<div class="row">
+		<p>{{HeuristicText}}</p>
+	</div>
+	<!--.panel-heading-->
+	<app-answers *ngFor="let item of answers"></app-answers>
 </div>

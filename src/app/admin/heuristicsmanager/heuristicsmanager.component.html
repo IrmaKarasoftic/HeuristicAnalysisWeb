@@ -5,11 +5,13 @@
         <thead>
             <tr>
                 <th>Heuristic</th>
+                <th>Heuristic text</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of heuristics">
+                <td>{{item.HeuristicTitle}}</td>
                 <td>{{item.HeuristicText}}</td>
                 <td>
                     <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateHeuristicDialog(item)">Update</button>
@@ -26,6 +28,11 @@
         <h2>Create heuristic</h2>
     </div>
     <div content class="d-flex flex-column">
+        <label>Title</label>
+        <input type="text" id="heuristicTitle" [(ngModel)]="selectedHeuristic.HeuristicTitle">
+    </div>
+    <div content class="d-flex flex-column">
+        <label>Text</label>
         <input type="text" id="heuristicText" [(ngModel)]="selectedHeuristic.HeuristicText">
     </div>
     <div footer>
@@ -38,6 +45,11 @@
         <h2>Update heuristic</h2>
     </div>
     <div content class="d-flex flex-column">
+        <label>Title</label>
+        <input type="text" id="heuristicTitle" [(ngModel)]="selectedHeuristic.HeuristicTitle">
+    </div>
+    <div content class="d-flex flex-column">
+        <label>Text</label>
         <input type="text" id="heuristicText" [(ngModel)]="selectedHeuristic.HeuristicText">
     </div>
     <div footer>

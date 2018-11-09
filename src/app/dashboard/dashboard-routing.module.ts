@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
+import { AppAnalysisComponent } from './app-analysis/app-analysis.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   {
-    path: '', component: AllAnalysesComponent,
+    path: '', component: DashboardComponent,
     children: [
-      { path: 'analysis', component: AnalysisComponent },
+      { path: 'analysis', component: AllAnalysesComponent },
+      { path: 'app-analysis/:id', component: AppAnalysisComponent },
     ]
   },
 ];

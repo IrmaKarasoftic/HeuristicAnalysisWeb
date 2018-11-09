@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from './analysis.model';
 @Component({
   selector: 'app-analysis',
@@ -6,6 +6,9 @@ import { Answer } from './analysis.model';
   styleUrls: ['./analysis.component.css']
 })
 export class AnalysisComponent implements OnInit {
+  @Input() HeuristicTitle: string;
+  @Input() HeuristicText: string;
+  
   answers: Answer[] = [];
 
   a1: Answer = {

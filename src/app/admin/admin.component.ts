@@ -8,4 +8,8 @@ import { Application } from './application';
   ]
 })
 export class AdminComponent {
+  constructor() { }
+
+  ngOnInit() {
+  }
 }

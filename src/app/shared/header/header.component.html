@@ -9,10 +9,17 @@
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['']">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/dashboard']">Analiza</a>
-        </li>
         
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              User panel
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" [routerLink]="['/dashboard/analysis']">View All Analyses</a>
+              <a class="dropdown-item" [routerLink]="['/admin/heuristics']">Heuristics</a>
+            </div>
+          </li>
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Admin panel

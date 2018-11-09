@@ -14,11 +14,13 @@ export class HeuristicsComponent implements OnInit {
   constructor(private heuristicService: HeuristicService) { }
   defaultSelectedHeuristic: any = {
     Id: null,
-    HeuristicText: ''
+    HeuristicText: '',
+    HeuristicTitle: ''
   };
   selectedHeuristic: any = {
     Id: null,
-    HeuristicText: ''
+    HeuristicText: '',
+    HeuristicTitle: ''
   };
   public heuristics: Array<string> = [];
   ngOnInit() {
