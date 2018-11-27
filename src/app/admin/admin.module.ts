@@ -13,6 +13,7 @@ import { ApplicationComponent } from './application/application.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { AnalysisDetailsComponent } from './analysis-details/analysis-details.component';
+import { NgxTypeaheadModule } from 'ngx-typeahead';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { AnalysisDetailsComponent } from './analysis-details/analysis-details.co
         FormsModule,
         NgbModule,
         SharedModule,
-        FilterPipeModule
+        FilterPipeModule,
+        NgxTypeaheadModule
     ],
     declarations: [
         CreateAnalysisFormComponent,

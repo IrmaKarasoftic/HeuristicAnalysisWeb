@@ -40,11 +40,11 @@
      <h5>{{analysis?.VersionName}}</h5>
       <h6>Heuristics</h6>
       <div *ngFor="let heuristic of analysis?.Heuristics">
-        <p>{{heuristic}}</p>
+        <p>{{heuristic.HeuristicText}}</p>
       </div>
       <h6>Groups</h6>
       <div *ngFor="let group of analysis?.Groups">
-        <p>{{group}}</p>
+        <p>{{group.GroupName}}</p>
       </div>
   </div>
   <div footer>

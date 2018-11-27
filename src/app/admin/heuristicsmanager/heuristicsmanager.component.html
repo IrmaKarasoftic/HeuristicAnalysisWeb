@@ -1,25 +1,37 @@
 <div class="container">
     <h1>Heuristics Manager</h1>
-    <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateHeuristicDialog()">Add</button>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Heuristic</th>
-                <th>Heuristic text</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of heuristics">
-                <td>{{item.HeuristicTitle}}</td>
-                <td>{{item.HeuristicText}}</td>
-                <td>
-                    <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateHeuristicDialog(item)">Update</button>
-                    <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteHeuristicDialog(item)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <ngb-tabset>
+        <ngb-tab title="Heuristics">
+            <ng-template ngbTabContent>
+                <button class="btn btn-secondary btn-manage" type="button" (click)="openCreateHeuristicDialog()">Add</button>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Heuristic</th>
+                            <th>Heuristic text</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of heuristics">
+                            <td>{{item.HeuristicTitle}}</td>
+                            <td>{{item.HeuristicText}}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-manage" type="button" (click)="openUpdateHeuristicDialog(item)">Update</button>
+                                <button class="btn btn-secondary btn-manage" type="button" (click)="openDeleteHeuristicDialog(item)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Heuristic Lists">
+            <ng-template ngbTabContent>
+            </ng-template>
+
+        </ngb-tab>
+
+    </ngb-tabset>
 </div>
 
 <app-dialog #CreateHeuristicDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateHeuristicDialog()"

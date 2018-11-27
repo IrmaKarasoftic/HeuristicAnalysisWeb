@@ -75,7 +75,7 @@ export class ApplicationComponent implements OnInit {
         res => {
           if (res) {
             this.analysis = res;
-            console.log(res.result);
+            console.log( this.analysis);
           }
         },
         (err) => {

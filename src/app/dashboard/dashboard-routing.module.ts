@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AnalysisComponent } from './analysis/analysis.component';
 import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
-import { AppAnalysisComponent } from './app-analysis/app-analysis.component';
+import { ApplicationAnalysisComponent } from './application-analysis/application-analysis.component';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
@@ -10,7 +9,7 @@ const routes: Routes = [
     path: '', component: DashboardComponent,
     children: [
       { path: 'analysis', component: AllAnalysesComponent },
-      { path: 'app-analysis/:id', component: AppAnalysisComponent },
+      { path: 'app-analysis/:id', component: ApplicationAnalysisComponent },
     ]
   },
 ];

@@ -21,6 +21,8 @@ export class CreateAnalysisFormComponent implements OnInit {
     heuristics: null,
     groups: null
   }
+  public search = '';
+
   constructor(public applicationService: ApplicationsService, public heuristicService: HeuristicService, public userService: UserService, 
     public analysisService: AnalysisService) { }
   public applications: Array<any> = [];
@@ -50,6 +52,12 @@ export class CreateAnalysisFormComponent implements OnInit {
           }
         }
       );
+  }
+ 
+  handleResultSelected(result) {
+    const heuristic = this.heuristics.find(x => x.Id == result.Id);
+    heuristic.Checked = true;
+    this.search = '';
   }
 
   getAllHeuristics() {

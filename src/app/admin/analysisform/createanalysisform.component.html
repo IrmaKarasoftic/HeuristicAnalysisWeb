@@ -6,9 +6,20 @@
   <select name="selectVersion" class="d-flex flex-fill" [(ngModel)]="selectedVersion" (ngModelChange)="onVersionSelect($event)">
     <option *ngFor="let item of appVersions" [value]="item.Id">{{item.VersionName}}</option>
   </select>
+  
+
+  <div class="search-results">
+      <input [value]="search"
+        ngxTypeahead
+        [taList]="heuristics"
+        taListItemLabel="HeuristicText"
+        placeholder="Start typing"
+        (taSelected)="handleResultSelected($event)">
+    </div>
+
   <h2>Heuristics</h2>
   <div class="form-check" *ngFor="let heuristic of heuristics">
-    <label>
+    <label *ngIf="heuristic.Checked">
       <input type="checkbox" [(ngModel)]="heuristic.Checked" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
     </label>
   </div>
