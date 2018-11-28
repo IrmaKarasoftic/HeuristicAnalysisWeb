@@ -65,6 +65,7 @@ export class CreateAnalysisFormComponent implements OnInit {
       .subscribe(
         (res) => {
           this.heuristics = res;
+          console.log(res);
         },
         (err: any) => {
           if (err.errors) {
