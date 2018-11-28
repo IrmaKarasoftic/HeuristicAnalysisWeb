@@ -132,6 +132,7 @@ export class UsersComponent implements OnInit {
   }
 
   updateUser() {
+
     this.userService.updateUser(this.selectedUser).subscribe(
       (res) => {
         this.getAllUsers();
