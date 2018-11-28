@@ -1,0 +1,66 @@
+/*#region Margin*/
+
+.mleft-5 {
+    margin-left: 5px;
+}
+
+.mbottom-10 {
+    margin-bottom: 10px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+/*#endregion Margin*/
+
+/*#region General Page SCSS*/
+
+// add colors to separate scss
+.page-header {
+    display: flex;
+    flex-direction: row;
+    margin: 25px 0;
+    font-size: 25px;
+    color: #03A9F4;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal-header {
+    font-size: 25px;
+}
+
+.basic-modal-header {
+    display: flex;
+    flex-direction: column;
+    color: #03A9F4;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-modal-header {
+    display: flex;
+    flex-direction: column;
+    color: #dc3545;
+    justify-content: center;
+    align-items: center;
+    i {
+        color: #dc3545;
+        font-size: 45px;
+    }
+}
+
+btn-delete {
+    background-color: #f44234;
+}
+
+btn-update {
+    background-color: #03A9F4;
+}
+
+.modal-btn {
+    width: 80px;
+}
+
+/*#endregion General Page SCSS*/
