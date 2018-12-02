@@ -11,7 +11,7 @@
       <td>{{item.Aplikacija.Url}}</td>
       <td>{{item.Verzija.VersionName}}</td>
       <td>
-        <button class="btn btn-secondary btn-manage" type="button" [routerLink]="['/dashboard/app-analysis', item.Id]">Analyze</button>
+        <button class="btn btn-secondary btn-manage" type="button" (click)='openAnalysis(item)'>Analyze</button>
       </td>
     </tr>
   </tbody>

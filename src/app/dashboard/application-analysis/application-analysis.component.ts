@@ -63,9 +63,7 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   }
 
   save() {
-    var analysis = this.createModel(this.appAnalysis);
-    console.log(analysis);
-    this.analysisService.postAnalysisAnswers(analysis).subscribe(
+    this.analysisService.updateAnalysis(this.appAnalysis).subscribe(
       (res) => {
         alert(res);
       },
@@ -81,8 +79,8 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   
   createModel(analysis) {
     var a : any= {};
-    a.appId = analysis.AppId;
-    a.versionId = analysis.VersionId;
+    a.analysisId = analysis.AnalysisId;
+    a.userId = 1;
     a.heuristics = analysis.Heuristics;
     return a;
   }
@@ -103,7 +101,7 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
       reader.onload = e => {
         this.imageSrc = reader.result;
         var model = {
-          src : this.imageSrc.toString(),
+          Src : this.imageSrc.toString(),
         }
         item.Images.push(model);
       }

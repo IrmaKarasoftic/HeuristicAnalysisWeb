@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalysisService } from '../../core/services/analysis.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-analyses',
@@ -10,7 +11,7 @@ export class AllAnalysesComponent implements OnInit {
   allAnalysis: any;
   analysis: any;
 
-  constructor(private analysisService: AnalysisService) { }
+  constructor(private analysisService: AnalysisService, private router: Router ) { }
 
   ngOnInit() {
   
@@ -28,6 +29,27 @@ export class AllAnalysesComponent implements OnInit {
         }
       }
     );
+  }
+  openAnalysis(item) {
+    if (!item.Created) {
+      var a : any= {};
+      a.analysisId = item.AnalysisFormId;
+      a.userId = 1;
+      this.analysisService.postAnalysisAnswers(a).subscribe(
+        (res) => {
+        this.router.navigate(['/dashboard/app-analysis', res.Id]);
+    },
+        (err: any) => {
+          if (err.errors) {
+            console.log(err.errors[0]);
+          } else if (err.hasError) {
+            console.log(err.message);
+          }
+        }
+      );
+    } else {
+      this.router.navigate(['/dashboard/app-analysis', item.Id]);
+    }
   }
 
 }

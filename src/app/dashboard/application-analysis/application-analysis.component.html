@@ -1,70 +1,72 @@
-<div *ngFor="let heuristic of appAnalysis?.Heuristics">
-  <div>
-    <div class="row">
-      <h4>{{heuristic.HeuristicTitle}}</h4>
-    </div>
-    <br>
-    <div class="row">
-      <p>{{heuristic.HeuristicText}}</p>
-    </div>
-  </div>
-
-  <div class="container" *ngFor="let answer of answers">
-    <div id="odgovori">
-      <div class="odgovori">
-        <ul class="list-group-item pitanjeOdgovor">
-          <div class="pitanje">Description</div>
-          <div class="odgovor opisProblema">
-            <textarea rows='3' [(ngModel)]='heuristic.description'></textarea>
-          </div>
-        </ul>
-        <ul class="list-group-item pitanjeOdgovor">
-          <div class="pitanje">Level</div>
-          <div class="odgovor">
-            <li class="">
-              <label class="radio-inline">
-                <input type="radio" name="optradio">Nizak
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio">Srednji
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optradio">Visok
-              </label>
-            </li>
-          </div>
-        </ul>
-        <ul class="list-group-item pitanjeOdgovor">
-          <div class="pitanje">Location</div>
-          <div class="odgovor opisProblema">
-            <textarea rows='2' [(ngModel)]='heuristic.location'></textarea>
-          </div>
-        </ul>
-        <ul class="list-group-item pitanjeOdgovor">
-          <div class="pitanje">Improvement recommendation</div>
-          <div class="odgovor opisProblema">
-            <textarea rows='3' [(ngModel)]='heuristic.recommendation'></textarea>
-          </div>
-        </ul>
-        <ul class="list-group-item pitanjeOdgovor" (paste)="pastePicture($event, heuristic)">
-          <div class="row">
-            <div class="pitanje">Slika</div>
-            <input #fileInput placeholder="Paste your image here"><span>or</span> <input name="files[]" id="filter_input"
-              class="image-upload-overlay" (change)="onFileChange($event, heuristic)" required multiple multiple="multiple" type="file">
-          </div>
-          <div class="image-container" *ngFor='let img of heuristic.Images'>
-            <img [src]="img.src" alt="" class="image">
-            <div class="overlay">
-              <div class="images-button">
-                <a><i class="fa fa-trash" (click)="removeFileFromCollection(img, heuristic)"></i></a>
-              </div>
-            </div>
-          </div>
-        </ul>
-        <hr>
+<div class="col-12">
+  <div *ngFor="let heuristic of appAnalysis?.Heuristics">
+    <div>
+      <div class="row">
+        <h4>{{heuristic.HeuristicTitle}}</h4>
+      </div>
+      <br>
+      <div class="row">
+        <p>{{heuristic.HeuristicText}}</p>
       </div>
     </div>
+
+    <div class="container" *ngFor="let answer of heuristic.Answers">
+      <div id="odgovori">
+        <div class="odgovori">
+          <ul class="list-group-item pitanjeOdgovor">
+            <div class="pitanje">Description</div>
+            <div class="odgovor opisProblema">
+              <textarea rows='3' [(ngModel)]='answer.Description'></textarea>
+            </div>
+          </ul>
+          <ul class="list-group-item pitanjeOdgovor">
+            <div class="pitanje">Level</div>
+            <div class="odgovor">
+              <li class="">
+                <label class="radio-inline">
+                  <input type="radio" name="optradio" value="1">Nizak
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="optradio" value="2">Srednji
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="optradio" value="3">Visok
+                </label>
+              </li>
+            </div>
+          </ul>
+          <ul class="list-group-item pitanjeOdgovor">
+            <div class="pitanje">Location</div>
+            <div class="odgovor opisProblema">
+              <textarea rows='2' [(ngModel)]='answer.Location'></textarea>
+            </div>
+          </ul>
+          <ul class="list-group-item pitanjeOdgovor">
+            <div class="pitanje">Improvement recommendation</div>
+            <div class="odgovor opisProblema">
+              <textarea rows='3' [(ngModel)]='answer.Recommendation'></textarea>
+            </div>
+          </ul>
+          <ul class="list-group-item pitanjeOdgovor" (paste)="pastePicture($event, answer)">
+            <div class="row">
+              <div class="pitanje">Slika</div>
+              <input #fileInput placeholder="Paste your image here"><span>or</span> <input name="files[]" id="filter_input"
+                class="image-upload-overlay" (change)="onFileChange($event, answer)" required multiple multiple="multiple" type="file">
+            </div>
+            <div class="image-container" *ngFor='let img of answer.Images'>
+              <img [src]="img.Src" alt="" class="image">
+              <div class="overlay">
+                <div class="images-button">
+                  <a><i class="fa fa-trash" (click)="removeFileFromCollection(img, answer)"></i></a>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)='AddAnswer()'>Add one more answer</button>
   </div>
-  <button type="button" class="btn btn-primary" (click)='AddAnswer()'>Add one more answer</button>
+  <button type="button" class="btn btn-primary" (click)='save()'>Save</button>
 </div>
-<button type="button" class="btn btn-primary" (click)='save()'>Save</button>

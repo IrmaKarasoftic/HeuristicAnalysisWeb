@@ -29,7 +29,7 @@ export class AnalysisService extends BaseService {
     }
 
     updateAnalysis(analysis: any) {
-        return this.update('Analysis', analysis.Id, analysis);
+        return this.update('AnalysisApplication', analysis.AnalysisId, analysis);
     }
 
     deleteAnalysis(id: number) {
