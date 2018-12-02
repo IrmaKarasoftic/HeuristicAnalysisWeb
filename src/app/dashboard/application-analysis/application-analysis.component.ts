@@ -17,20 +17,21 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   answers: Answer[] = [];
 
   a1: Answer = {
-    opisProblema: 'Opis1',
-    lokacijaProblema: 'Lokacija1',
-    nivoProblema: 1,
-    preporukaZaPoboljsanje: 'Preporuka1'
+    description: 'Opis1',
+    location: 'Lokacija1',
+    level: 1,
+    recommendation: 'Preporuka1',
+    images: []
   };
   default: Answer = {
-    opisProblema: '',
-    lokacijaProblema: '',
-    nivoProblema: 1,
-    preporukaZaPoboljsanje: ''
+    description: '',
+    location: '',
+    level: 1,
+    recommendation: '',
+    images: []
   };
   image: File;
   imageSrc: any;
-  pastedImages: Array<any> = [];
   @ViewChild('fileInput') fileInput;
   formData: any;
 
@@ -62,20 +63,40 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   }
 
   save() {
-    console.log(this.appAnalysis);
+    var analysis = this.createModel(this.appAnalysis);
+    console.log(analysis);
+    this.analysisService.postAnalysisAnswers(analysis).subscribe(
+      (res) => {
+        alert(res);
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+      }
+    );
   }
   
+  createModel(analysis) {
+    var a : any= {};
+    a.appId = analysis.AppId;
+    a.versionId = analysis.VersionId;
+    a.heuristics = analysis.Heuristics;
+    return a;
+  }
   AddAnswer() {
     this.answers.push(this.default);
   }
 
-  pastePicture(event: ClipboardEvent) {
+  pastePicture(event: ClipboardEvent, item) {
     event.clipboardData.getData('image/jpg')
     this.image = event.clipboardData.files[0];
-    this.getBase64(this.image)
+    this.getBase64(this.image, item)
   }
 
-  getBase64(image) {
+  getBase64(image, item) {
     if (image) {
       const reader = new FileReader();
       reader.readAsDataURL(image);
@@ -84,23 +105,23 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
         var model = {
           src : this.imageSrc.toString(),
         }
-        this.pastedImages.push(model);
+        item.Images.push(model);
       }
     }
   }
 
-  onFileChange(event) {
+  onFileChange(event, item) {
     if (event.target.files && event.target.files.length > 0) {
       for (const file of event.target.files) {
-        this.getBase64(file);
+        this.getBase64(file, item);
       }
     }
   }
 
-  removeFileFromCollection(file: string) {
-    const index = this.pastedImages.indexOf(file);
+  removeFileFromCollection(file: string, item) {
+    const index = item.Images.indexOf(file);
     if (index >= 0) {
-      this.pastedImages.splice(index, 1);
+      item.Images.splice(index, 1);
     }
   }
 
@@ -110,7 +131,7 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
 
   uploadImage() {
     // const aId = 1;
-    // this.model.images = this.pastedImages
+    // this.model.images = this.Images
     // return this.http.post('http://localhost:52451/api/Image', this.model).subscribe(
     //   (res) => {
     //   },

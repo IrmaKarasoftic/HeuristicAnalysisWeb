@@ -36,8 +36,6 @@
     <h2>Analysis form details</h2>
   </div>
   <div content class="d-flex flex-column">
-      <h4>{{analysis?.ApplicationName}}</h4>
-     <h5>{{analysis?.VersionName}}</h5>
       <h6>Heuristics</h6>
       <div *ngFor="let heuristic of analysis?.Heuristics">
         <p>{{heuristic.HeuristicText}}</p>

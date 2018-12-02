@@ -8,12 +8,14 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { AllAnalysesComponent } from './all-analyses/all-analyses.component';
 import { ApplicationAnalysisComponent } from './application-analysis/application-analysis.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
         CommonModule,
         CoreModule,
         RouterModule,
+        FormsModule,
         DashboardRoutingModule,
         NgbModule,
         SharedModule,

@@ -25,7 +25,7 @@ export class UserService extends BaseService {
     }
 
     searchGroups() {
-        return this.getAll('Groups');
+        return this.getAll('UserGroups');
     }
 
     createUser(user: any) {
@@ -41,22 +41,22 @@ export class UserService extends BaseService {
     }
 
     createUserGroup(group: any) {
-        return this.insert('Groups', group);
+        return this.insert('UserGroups', group);
     }
 
     updateUserGroup(group: any) {
-        return this.update('Groups', group.Id, group);
+        return this.update('UserGroups', group.Id, group);
     }
 
     deleteUserGroup(id: number) {
-        return this.delete('Groups', id);
+        return this.delete('UserGroups', id);
     }
 
     getUsersForGroups(id: number) {
-        return this.get('Groups/users', id);
+        return this.get('UserGroups/users', id);
     }
 
     assignUser(user) {
-        return this.insert('Groups/assign', user);
+        return this.insert('UserGroups/assign', user);
     }
 }

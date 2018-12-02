@@ -24,6 +24,10 @@ export class AnalysisService extends BaseService {
         return this.insert('Analysis', analysis);
     }
 
+    postAnalysisAnswers(analysis: any) {
+        return this.insert('AnalysisApplication', analysis);
+    }
+
     updateAnalysis(analysis: any) {
         return this.update('Analysis', analysis.Id, analysis);
     }

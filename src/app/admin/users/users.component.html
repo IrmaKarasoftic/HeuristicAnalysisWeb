@@ -228,10 +228,10 @@
           <td class="assign-deassign-user">
             <span (click)='deassign(user)'
               *ngIf='user.Assigned'
-              class="deassign">False</span>
+              class="assined">Yes</span>
             <span (click)='assign(user)'
-              class="assined"
-              *ngIf='!user.Assigned'>True</span>
+              class="deassign"
+              *ngIf='!user.Assigned'>No</span>
           </td>
         </tbody>
       </table>

@@ -1,6 +1,7 @@
 export class Answer {
-  opisProblema: string;
-  nivoProblema: number;
-  lokacijaProblema: string;
-  preporukaZaPoboljsanje: string;
+  description: string;
+  level: number;
+  location: string;
+  recommendation: string;
+  images: any;
 }
