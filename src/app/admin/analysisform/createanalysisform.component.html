@@ -19,7 +19,7 @@
 
   <h2>Heuristics</h2>
   <div class="form-check" *ngFor="let heuristic of heuristics">
-    <label *ngIf="heuristic.Checked">
+    <label>
       <input type="checkbox" [(ngModel)]="heuristic.Checked" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
     </label>
   </div>
