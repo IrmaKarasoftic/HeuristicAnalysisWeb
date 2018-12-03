@@ -40,7 +40,7 @@ import { CardComponent } from './card/card.component';
         ImageUploadComponent,
         SwitchSliderComponent,
         SpinnerComponent,
-        CardComponent
+        CardComponent,
     ],
     exports: [
         DialogComponent,
@@ -52,7 +52,7 @@ import { CardComponent } from './card/card.component';
         ImageUploadComponent,
         SwitchSliderComponent,
         SpinnerComponent,
-        CardComponent
+        CardComponent,
     ],
     providers: [DialogService, SpinnerService, LoaderService]
 })

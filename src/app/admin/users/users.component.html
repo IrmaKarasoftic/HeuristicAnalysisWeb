@@ -8,10 +8,7 @@
       <ng-template ngbTabContent>
         <div class="tab-container">
           <div class="add-btn-container">
-            <button
-              class="btn btn-primary add-btn mbottom-10"
-              type="button"
-              (click)="openCreateUserDialog()">
+            <button class="btn btn-primary add-btn mbottom-10" type="button" (click)="openCreateUserDialog()">
               <i class="fa fa-plus-circle"></i> Add User
             </button>
           </div>
@@ -19,6 +16,7 @@
             <div class="tab-table-header">
               <div class="col-md-2">Last name</div>
               <div class="col-md-2">First name</div>
+              <div class="col-md-2">Email</div>
               <div class="col-md-2">Date of birth</div>
               <div class="col-md-2">Occupation</div>
               <div class="col-md-4 action-header">Actions</div>
@@ -26,16 +24,16 @@
             <div class="tab-table-row" *ngFor="let item of users">
               <div class="col-md-2">{{item.FirstName}}</div>
               <div class="col-md-2">{{item.LastName}}</div>
+              <div class="col-md-2">{{item.Email}}</div>
               <div class="col-md-2">{{item.DateOfBirth| date }}</div>
               <div class="col-md-2">{{item.Occupation}}</div>
               <div class="col-md-4">
                 <div class="btn-container pull-right">
-                  <button class="btn btn-primary circle-btn" type="button"
-                    (click)="openUpdateUserDialog(item)"><i class="fa
+                  <button class="btn btn-primary circle-btn" type="button" (click)="openUpdateUserDialog(item)"><i
+                      class="fa
                       fa-pencil"></i></button>
-                  <button class="btn btn-danger circle-btn mleft-5"
-                    type="button"
-                    (click)="openDeleteUserDialog(item)"><i class="fa
+                  <button class="btn btn-danger circle-btn mleft-5" type="button" (click)="openDeleteUserDialog(item)"><i
+                      class="fa
                       fa-trash"></i></button>
                 </div>
               </div>
@@ -50,10 +48,7 @@
 
         <div class="tab-container">
           <div class="add-btn-container">
-            <button
-              class="btn btn-primary add-btn mbottom-10"
-              type="button"
-              (click)="openCreateUserGroupDialog()">
+            <button class="btn btn-primary add-btn mbottom-10" type="button" (click)="openCreateUserGroupDialog()">
               <i class="fa fa-plus-circle"></i> Add Group
             </button>
           </div>
@@ -68,16 +63,14 @@
               <div class="col-md-2">{{item.NumberOfUsers}}</div>
               <div class="col-md-8">
                 <div class="btn-container pull-right">
-                  <button class="btn btn-secondary circle-btn" type="button"
-                    (click)="openManageUsersDialog(item)"><i class="fa
+                  <button class="btn btn-secondary circle-btn" type="button" (click)="openManageUsersDialog(item)"><i
+                      class="fa
                       fa-cogs"></i></button>
-                  <button class="btn btn-primary circle-btn mleft-5"
-                    type="button"
-                    (click)="openUpdateUserGroupDialog(item)"><i class="fa
+                  <button class="btn btn-primary circle-btn mleft-5" type="button" (click)="openUpdateUserGroupDialog(item)"><i
+                      class="fa
                       fa-pencil"></i></button>
-                  <button class="btn btn-danger circle-btn mleft-5"
-                    type="button"
-                    (click)="openDeleteUserGroupDialog(item)"><i class="fa
+                  <button class="btn btn-danger circle-btn mleft-5" type="button" (click)="openDeleteUserGroupDialog(item)"><i
+                      class="fa
                       fa-trash"></i></button>
                 </div>
               </div>
@@ -126,8 +119,7 @@
 
 </div>
 
-<app-dialog #CreateUserDialog closeButtonLabel="Close"
-  submitButtonLabel="Create" (closeEvent)="closeCreateUserDialog()"
+<app-dialog #CreateUserDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateUserDialog()"
   (submitEvent)="createUser()">
   <div header>
     <h2>Create user</h2>
@@ -137,39 +129,34 @@
     <input type="text" id="firstName" [(ngModel)]="selectedUser.FirstName">
     <label>Last name</label>
     <input type="text" id="lastName" [(ngModel)]="selectedUser.LastName">
+    <label>Email</label>
+    <input type="text" id="lastName" [(ngModel)]="selectedUser.Email">
     <label>Occupation</label>
     <input type="text" id="occupation" [(ngModel)]="selectedUser.Occupation">
     <label>Date of birth</label>
-    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()"
-      name="dp" [(ngModel)]="selectedUser.DateOfBirth"
+    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d.toggle()" name="dp" [(ngModel)]="selectedUser.DateOfBirth"
       ngbDatepicker #d="ngbDatepicker">
   </div>
   <div footer>
   </div>
 </app-dialog>
 
-<app-dialog #UpdateUserDialog closeButtonLabel="Close"
-  submitButtonLabel="Update" (closeEvent)="closeUpdateUserDialog()"
+<app-dialog #UpdateUserDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeUpdateUserDialog()"
   (submitEvent)="updateUser()">
   <div header>
     <div class="custom-modal-header basic-modal-header"><span>Update user</span></div>
   </div>
   <div content class="d-flex flex-column">
     <label class="no-margin" for="firstName">First name</label>
-    <input type="text" class="form-control mbottom-10" id="firstName"
-      name="firstName"
-      [(ngModel)]="selectedUser.FirstName">
+    <input type="text" class="form-control mbottom-10" id="firstName" name="firstName" [(ngModel)]="selectedUser.FirstName">
     <label class="no-margin" for="lastName">Last name</label>
-    <input type="text" class="form-control mbottom-10" id="lastName"
-      name="lastName"
-      [(ngModel)]="selectedUser.LastName">
+    <input type="text" class="form-control mbottom-10" id="lastName" name="lastName" [(ngModel)]="selectedUser.LastName">
+    <label class="no-margin" for="email">Email</label>
+    <input type="text" class="form-control mbottom-10" id="email" name="email" [(ngModel)]="selectedUser.Email">
     <label class="no-margin" for="occupation">Occupation</label>
-    <input type="text" class="form-control mbottom-10" id="occupation"
-      name="occupation"
-      [(ngModel)]="selectedUser.Occupation">
+    <input type="text" class="form-control mbottom-10" id="occupation" name="occupation" [(ngModel)]="selectedUser.Occupation">
     <label class="no-margin">Date of birth</label>
-    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d1.toggle()"
-      name="dp2" [(ngModel)]="selectedUser.DateOfBirth"
+    <input class="form-control" placeholder="yyyy-mm-dd" (click)="d1.toggle()" name="dp2" [(ngModel)]="selectedUser.DateOfBirth"
       ngbDatepicker #d1="ngbDatepicker">
   </div>
   <div footer>
@@ -177,8 +164,7 @@
 </app-dialog>
 
 
-<app-dialog #DeleteUserDialog closeButtonLabel="Close"
-  submitButtonLabel="Delete" (closeEvent)="closeDeleteUserDialog()"
+<app-dialog #DeleteUserDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteUserDialog()"
   (submitEvent)="deleteUser()">
   <div header>
     <div class="custom-modal-header delete-modal-header">
@@ -195,17 +181,14 @@
 </app-dialog>
 
 
-<app-dialog #ManageUsersDialog closeButtonLabel="Close"
-  submitButtonLabel="Update" (closeEvent)="closeManageUsersDialog()"
+<app-dialog #ManageUsersDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeManageUsersDialog()"
   (submitEvent)="updateUser()">
   <div header>
     <div class="custom-modal-header basic-modal-header"><span>Manage users</span></div>
   </div>
   <div content class="d-flex flex-column">
     <label for="typeahead-basic">Search</label>
-    <input name="typeahead-basic" id="typeahead-basic" type="text"
-      class="form-control col-md-6 mbottom-10"
-      [(ngModel)]="userFilter.Name"
+    <input name="typeahead-basic" id="typeahead-basic" type="text" class="form-control col-md-6 mbottom-10" [(ngModel)]="userFilter.Name"
       placeholder="Search for user" />
     <table>
       <thead>
@@ -216,8 +199,7 @@
           <th>Assigned
             <ng-template #tipContent class="tooltip">Change assignment by
               clicking on it!</ng-template>
-            <i class="fa fa-info-circle"
-              [ngbTooltip]="tipContent"></i></th>
+            <i class="fa fa-info-circle" [ngbTooltip]="tipContent"></i></th>
         </tr>
       </thead>
       <tbody>
@@ -226,64 +208,53 @@
           <td>{{user.DateOfBirth}}</td>
           <td>{{user.Occupation}}</td>
           <td class="assign-deassign-user">
-            <span (click)='deassign(user)'
-              *ngIf='user.Assigned'
-              class="assined">Yes</span>
-            <span (click)='assign(user)'
-              class="deassign"
-              *ngIf='!user.Assigned'>No</span>
+            <span (click)='deassign(user)' *ngIf='user.Assigned' class="assined">Yes</span>
+            <span (click)='assign(user)' class="deassign" *ngIf='!user.Assigned'>No</span>
           </td>
-        </tbody>
-      </table>
-    </div>
-    <div footer>
-    </div>
-  </app-dialog>
+      </tbody>
+    </table>
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
 
-  <app-dialog #CreateUserGroupDialog closeButtonLabel="Close"
-    submitButtonLabel="Create" (closeEvent)="closeCreateUserGroupDialog()"
-    (submitEvent)="createUserGroup()">
-    <div header>
-      <div class="custom-modal-header basic-modal-header"><span>Create User
-          Group</span></div>
-    </div>
-    <div content class="d-flex flex-column">
-      <input type="text" class="form-control" id="groupName"
-        [(ngModel)]="selectedUserGroup.GroupName"
-        placeholder="Enter Group Name">
-    </div>
-    <div footer>
-    </div>
-  </app-dialog>
+<app-dialog #CreateUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateUserGroupDialog()"
+  (submitEvent)="createUserGroup()">
+  <div header>
+    <div class="custom-modal-header basic-modal-header"><span>Create User
+        Group</span></div>
+  </div>
+  <div content class="d-flex flex-column">
+    <input type="text" class="form-control" id="groupName" [(ngModel)]="selectedUserGroup.GroupName" placeholder="Enter Group Name">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
 
-  <app-dialog #UpdateUserGroupDialog closeButtonLabel="Close"
-    submitButtonLabel="Update" (closeEvent)="closeCreateUserGroupDialog()"
-    (submitEvent)="updateUserGroup()">
-    <div header>
-      <div class="custom-modal-header basic-modal-header"><span>Update User
-          Group</span></div>
-    </div>
-    <div content class="d-flex flex-column">
-      <input type="text" class="form-control" id="groupName"
-        [(ngModel)]="selectedUserGroup.GroupName"
-        placeholder="Enter Group Name">
-    </div>
-    <div footer>
-    </div>
-  </app-dialog>
+<app-dialog #UpdateUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Update" (closeEvent)="closeCreateUserGroupDialog()"
+  (submitEvent)="updateUserGroup()">
+  <div header>
+    <div class="custom-modal-header basic-modal-header"><span>Update User
+        Group</span></div>
+  </div>
+  <div content class="d-flex flex-column">
+    <input type="text" class="form-control" id="groupName" [(ngModel)]="selectedUserGroup.GroupName" placeholder="Enter Group Name">
+  </div>
+  <div footer>
+  </div>
+</app-dialog>
 
-  <app-dialog #DeleteUserGroupDialog closeButtonLabel="Close"
-    submitButtonLabel="Delete" (closeEvent)="closeDeleteUserGroupDialog()"
-    (submitEvent)="deleteUserGroup()">
-    <div header>
-      <div class="custom-modal-header delete-modal-header">
-        <div class="delete-modal-icon"><i class="fa fa-user-times"></i></div>
-        <div class="delete-modal-title">Delete User Group</div>
-      </div>
+<app-dialog #DeleteUserGroupDialog closeButtonLabel="Close" submitButtonLabel="Delete" (closeEvent)="closeDeleteUserGroupDialog()"
+  (submitEvent)="deleteUserGroup()">
+  <div header>
+    <div class="custom-modal-header delete-modal-header">
+      <div class="delete-modal-icon"><i class="fa fa-user-times"></i></div>
+      <div class="delete-modal-title">Delete User Group</div>
     </div>
-    <div content class="d-flex flex-column align-items-center">
-      <span>Are you sure you want delete this user group?</span>
-    </div>
-    <div footer>
-    </div>
-  </app-dialog>
+  </div>
+  <div content class="d-flex flex-column align-items-center">
+    <span>Are you sure you want delete this user group?</span>
+  </div>
+  <div footer>
+  </div>
+</app-dialog>

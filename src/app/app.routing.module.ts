@@ -7,6 +7,10 @@ const routes: Routes = [
         loadChildren: './admin/admin.module#AdminModule'
     },
     {
+        path: 'login', canActivate: [],
+        loadChildren: './login/login.module#LoginModule'
+    },
+    {
         path: 'dashboard', canActivate: [],
         loadChildren: './dashboard/dashboard.module#DashboardModule'
     },

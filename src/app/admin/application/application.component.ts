@@ -276,16 +276,15 @@ export class ApplicationComponent implements OnInit {
   closeAnalysisDetailsDialog() {
     this.analysisDetailsDialog.hide();
     this.analysis = null;
-
   }
 
   closeUpdateApplicationDialog() {
-    this.selectedApplication.hide();
+    this.updateApplicationDialog.hide();
     this.setSelectedApplicationToDefault()
   }
 
   closeDeleteApplicationDialog() {
-    this.selectedApplication.hide();
+    this.deleteApplicationDialog.hide();
     this.setSelectedApplicationToDefault()
   }
   closeCreateApplicationDialog() {

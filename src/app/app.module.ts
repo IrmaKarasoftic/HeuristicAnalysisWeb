@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
+    LoginModule,
     NgbModule.forRoot(),
   ],
   providers: [

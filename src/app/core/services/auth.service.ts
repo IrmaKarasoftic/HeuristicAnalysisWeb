@@ -22,116 +22,54 @@ export class AuthService extends BaseService {
     private dialogService: DialogService,
   ) {
     super(http);
-    this.getLoggedInName = new Subject();
-    this.isRegistration = new BehaviorSubject(false);
-    console.log('Init auth service', this);
-    this.loadIfLoggedIn();
   }
 
   isAuthenticated() {
-    return (localStorage.getItem('auth_token') !== null);
+    var a = localStorage.getItem('user_id');
+    return (localStorage.getItem('user_id') !== null);
   }
 
-  loadIfLoggedIn() {
-    if (this.isAuthenticated()) {
-      this.getLoggedInName.next(this.getUserName());
-    }
+  isAdmin() {
+    return (localStorage.getItem('admin') === "true");
   }
 
   getUserName() {
-    try {
-      const tokenDecoded = jwt_decode.decodeToken(this.getAuthToken().accessToken);
-      return tokenDecoded.firstName;
-    } catch (Error) {
-      return null;
-    }
+    return (localStorage.getItem('name'));
   }
 
   getUserEmail() {
-    try {
-      const tokenDecoded = jwt_decode.decodeToken(this.getAuthToken().accessToken);
-      return tokenDecoded.userEmail;
-    } catch (Error) {
-      return null;
-    }
+    return (localStorage.getItem('email'));
   }
 
   getUserId() {
-    try {
-      const tokenDecoded = jwt_decode.decodeToken(this.getAuthToken().accessToken);
-      return +tokenDecoded.userId;
-    } catch (Error) {
-      return null;
-    }
+    return (localStorage.getItem('user_id'));
   }
 
-  getAuthToken() {
-    try {
-      return JSON.parse(localStorage.getItem('auth_token'));
-    } catch (Error) {
-      return null;
-    }
-  }
-
-  isInRole(role: string): boolean {
-    if (!this.isAuthenticated()) { return false; }
-    const tokenDecoded = jwt_decode.decodeToken(this.getAuthToken().accessToken);
-    return (tokenDecoded.role.indexOf(role) > -1);
-  }
-
-  getRoles(): any {
-    if (!this.isAuthenticated()) { return false; }
-    const tokenDecoded = jwt_decode.decodeToken(this.getAuthToken().accessToken);
-    return (tokenDecoded.role);
-  }
-
-  redirectToDasboard() {
-    this.router.navigateByUrl('');
-  }
-
-  updateUsersData() {
-    this.loadIfLoggedIn();
-    /* this.getRefreshToken().subscribe(
-      (res: any) => {
-        this.loadIfLoggedIn();
-      }
-    ); */
-  }
-
-  getRefreshToken() {
-    // const url = this.buildUrl('user/SSO/token/refresh');
-    // const auth_token = this.getAuthToken();
-
-    // if (auth_token === null && this.router.url !== '') {
-    //   this.router.navigateByUrl('');
-    // }
-
-    // const refreshModel = new RefreshToken(auth_token.refreshToken);
-
-    // return this._http.post(url, refreshModel).pipe(tap(
-    //   (res: OkResponse<any>) => {
-    //     localStorage.setItem('auth_token', JSON.stringify(res.result));
-    //   }))
-    //   .pipe(catchError(err => {
-    //     return of(false);
-    //   }));
+  redirectToDasboard(isAdmin) {
+    (isAdmin) ? this.router.navigate(['/admin/applications']) : this.router.navigate(['/dashboard/analysis']);
   }
 
   login(model: LoginModel) {
-    // return this.insert('user/SSO/login', model).pipe(map(
-    //   (res: OkResponse<any>) => {
-    //     if (res.result.token !== null) {
-    //       localStorage.setItem('auth_token', JSON.stringify(res.result.token));
-    //     }
-    //     return res;
-    //   }
-    // ));
+    return this.insert('login', model)
+      .subscribe(
+        (res: any) => {
+          if (res !== null) {
+            console.log(res);
+            localStorage.setItem('user_id', JSON.stringify(res.Id));
+            localStorage.setItem('email', JSON.stringify(res.Email));
+            localStorage.setItem('name', JSON.stringify(res.LastName + ' ' + res.FirstName));
+            localStorage.setItem('admin', JSON.stringify(res.Admin));
+            this.redirectToDasboard(res.Admin);
+          }
+          return res;
+        }
+      );
   }
 
   logout() {
-    localStorage.removeItem('auth_token');
-    this.getLoggedInName.next(null);
-    // this.statusBarService.hide();
-    this.dialogService.hide();
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('admin');
   }
 }
