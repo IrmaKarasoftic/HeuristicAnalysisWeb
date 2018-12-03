@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { DialogService } from '../shared/dialog/dialog.service';
@@ -17,6 +18,7 @@ import { LoaderService } from './loader/loader.service';
 import { SpinnerService } from './spinner/spinner.service';
 import { SwitchSliderComponent } from './switch-slider/switch-slider.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { CardComponent } from './card/card.component';
 // Components
 
 @NgModule({
@@ -37,7 +39,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
         ImageCropperComponent,
         ImageUploadComponent,
         SwitchSliderComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        CardComponent
     ],
     exports: [
         DialogComponent,
@@ -48,7 +51,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
         ImageCropperComponent,
         ImageUploadComponent,
         SwitchSliderComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        CardComponent
     ],
     providers: [DialogService, SpinnerService, LoaderService]
 })
