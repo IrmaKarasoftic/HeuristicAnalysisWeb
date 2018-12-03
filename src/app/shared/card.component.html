@@ -1,0 +1,53 @@
+<ng-template #tipContent class="tooltip">Click for more info!</ng-template>
+<div class="card-container" *ngIf="!flipped">
+  <div class="card-wrapper">
+    <div class="card-top" (click)="flipIt()">
+      <div class="card-icon">
+        <i class="fa fa-file-code-o" aria-hidden="true"
+          [ngbTooltip]="tipContent"></i>
+      </div>
+      <span class="card-title">{{item.Name}}</span>
+    </div>
+    <div class="card-action-btns btn-container">
+      <button class="btn btn-primary circle-btn" type="button"
+        (click)="edit(item)"><i class="fa
+          fa-pencil"></i></button>
+      <button class="btn btn-danger circle-btn mleft-5"
+        type="button"
+        (click)="delete(item)"><i class="fa
+          fa-trash"></i></button>
+    </div>
+  </div>
+
+</div>
+<div [ngClass]="{'resize-card-wrapper':flipped}"
+  *ngIf="flipped">
+  <div class="d-flex flex-row">
+    <div class="resize-card-icon" (click)="flipIt()">
+      <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+    </div>
+    <div class="d-flex flex-column resize-card-header">
+      <span class="resize-card-title"><b>Name: </b>{{item.Name}}</span>
+      <span class="resize-card-title"><b>Url: </b><i>{{item.Url}}</i></span>
+    </div>
+
+  </div>
+  <div class="mtop-20 table-contaner">
+    <div class="d-flex flex-row table-header">
+      <span>Version Name</span>
+      <span>Version Date</span>
+    </div>
+    <div class="d-flex flex-row table-items" *ngFor="let i of item.Versions">
+      <span class="item-info">{{i.VersionName}}</span>
+      <span class="item-info">{{i.Date | date}}</span>
+      <span class="item-actions update-color" (click)="editVersion(i)">Update</span>
+      <span class="item-actions delete-color" (click)="deleteVersion(i)">Delete</span>
+    </div>
+    <button class="btn btn-primary pull-right add-button"
+      type="button"
+      (click)="createVersion(item)">
+      <i class="fa fa-plus" aria-hidden="true"></i> Add new
+    </button>
+  </div>
+
+</div>
