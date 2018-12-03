@@ -1,9 +1,10 @@
 export class Application {
-    appId: number;
+    Id: number;
     versions: Version[];
-    appName: string;
+    Name: string;
     url: string;
     expanded: boolean;
+    flipped: boolean;
 }
 
 export class Version {
