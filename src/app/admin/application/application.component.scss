@@ -1,0 +1,14 @@
+.application-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.application-list-container {
+    display: flex;
+    width: calc(100%/4);
+    .application-list-item {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+}

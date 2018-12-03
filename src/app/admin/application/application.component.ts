@@ -18,7 +18,7 @@ export class ApplicationComponent implements OnInit {
   @ViewChild('UpdateApplicationDialog') public updateApplicationDialog: DialogComponent;
   @ViewChild('DeleteApplicationDialog') public deleteApplicationDialog: DialogComponent;
   @ViewChild('AnalysisDetails') public analysisDetailsDialog: DialogComponent;
-
+  flipped = false;
   defaultSelectedVersion: any = {
     Id: null,
     VersionName: '',
@@ -56,6 +56,10 @@ export class ApplicationComponent implements OnInit {
       .subscribe(
         (res) => {
           this.applications = res;
+          this.applications.forEach(x => {
+            x.flipped = false;
+          });
+          console.log('apps', this.applications);
           this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
         },
         (err: any) => {
@@ -67,7 +71,35 @@ export class ApplicationComponent implements OnInit {
         }
       );
   }
-  
+  edit(obj: any) {
+    let item;
+    const idtest = parseInt(obj.Id);
+    for (let index = 0; index < this.applications.length; index++) {
+      const element = this.applications[index];
+      if (element.Id === idtest) {
+        item = element;
+      }
+    }
+    if (item) {
+      this.openUpdateApplicationDialog(item);
+
+    }
+
+  }
+  delete(obj: any) {
+    let item;
+    const idtest = parseInt(obj.Id);
+    for (let index = 0; index < this.applications.length; index++) {
+      const element = this.applications[index];
+      if (element.Id === idtest) {
+        item = element;
+      }
+    }
+    if (item) {
+      this.openDeleteApplicationDialog(item);
+
+    }
+  }
 
   getAnalysisById(id) {
     this.analysisService.getAnalysisById(id)
@@ -75,7 +107,7 @@ export class ApplicationComponent implements OnInit {
         res => {
           if (res) {
             this.analysis = res;
-            console.log( this.analysis);
+            console.log(this.analysis);
           }
         },
         (err) => {
@@ -192,6 +224,15 @@ export class ApplicationComponent implements OnInit {
       }
     );
   }
+  versionCreate(item: any) {
+    this.openCreateVersionDialog(item);
+  }
+  versionEdit(version: any) {
+    this.openUpdateVersionDialog(version);
+  }
+  versionDelete(version: any) {
+    this.openDeleteVersionDialog(version);
+  }
   setSelectedApplicationToDefault(): any {
     this.selectedApplication = JSON.parse(JSON.stringify(this.defaultSelectedApplication));
   }
@@ -228,12 +269,14 @@ export class ApplicationComponent implements OnInit {
 
   closeCreateVersionDialog() {
     this.createVersionDialog.hide();
-    this.setSelectedVersionToDefault()
+    this.setSelectedVersionToDefault();
+    this.flipped = true;
   }
 
   closeAnalysisDetailsDialog() {
     this.analysisDetailsDialog.hide();
     this.analysis = null;
+
   }
 
   closeUpdateApplicationDialog() {
@@ -258,15 +301,18 @@ export class ApplicationComponent implements OnInit {
   closeUpdateVersionDialog() {
     this.setSelectedVersionToDefault();
     this.updateVersionDialog.hide();
+    this.flipped = true;
   }
 
   openDeleteVersionDialog(version) {
     this.selectedVersion = JSON.parse(JSON.stringify(version));
     this.deleteVersionDialog.show();
+
   }
 
   closeDeleteVersionDialog() {
     this.deleteVersionDialog.hide();
     this.setSelectedVersionToDefault();
+    this.flipped = true;
   }
 }
