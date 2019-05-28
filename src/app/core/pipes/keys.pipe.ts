@@ -7,10 +7,10 @@ export class KeysPipe implements PipeTransform {
     const valueKeys = Object.keys(value);
 
     return valueKeys
-      .filter(enumMember => !isNaN(parseInt(enumMember, 10)))
+      .filter(enumMember => !isNaN(Number(enumMember, 10)))
       .map(enumMember => {
         return {
-          key: parseInt(enumMember, 10),
+          key: Number(enumMember, 10),
           value: value[enumMember].match(regexp).join(' ')
         };
       });

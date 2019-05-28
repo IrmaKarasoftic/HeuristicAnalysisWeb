@@ -2,9 +2,131 @@
 @import './mixins';
 @import '~bootstrap/scss/bootstrap';
 @import './general.scss';
+@import './select-css.css';
 body,
 html {
     background-repeat: repeat;
     background-position: center top;
     background-size: cover;
+}
+
+.select-box {
+  position: relative;
+  display: block;
+  width: 30%;
+  margin: 0 auto;
+  font-size: 18px;
+  color: #60666d;
+}
+
+.disclamer {
+  color: #a9a9a9;
+  margin-top: 20px;
+}
+
+.form-buttons  {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 30px 0;
+  button {
+    margin-left: 20px;
+  }
+}
+
+.title-1 {
+  font-size: 30px;
+  color: #03A9F4;
+  margin: 35px 0; 
+}
+
+.title-2 {
+  font-size: 25px;
+  color: #03A9F4;
+  margin: 25px 0; 
+}
+
+.logical-block {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+
+.tab-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-table-header {
+  display: flex;
+  flex-direction: row;
+  background-color: #dfdfdf;
+  padding: 10px 0;
+}
+
+.tab-table-header {
+  div {
+      font-size: 15px;
+      font-weight: 600;
+  }
+}
+
+.tab-table-row {
+  display: flex;
+  flex-direction: row;
+  border-left: 2px solid transparent;
+  padding: 10px 0;
+}
+
+.tab-table-row:hover {
+  border-left: 2px solid #03A9F4;
+  background-color: #dfdfdf;
+}
+
+.action-header {
+  text-align: end;
+}
+
+.circle-btn {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  font-size: 14px;
+  border-radius: 50px;
+  width: 25px;
+  height: 25px;
+}
+
+/*#endregion Table*/
+
+/*#region Tab Users*/
+
+.tab-container {
+  padding: 20px 10px;
+}
+
+/*#endregion Tab Users*/
+
+/*#region Tab User groups*/
+
+.assign-deassign-user:hover {
+  cursor: pointer;
+}
+
+.deassign {
+  color: red;
+}
+
+.assined {
+  color: green;
+}
+.overflow-hidden {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.message {
+  margin: 20px 0;
 }

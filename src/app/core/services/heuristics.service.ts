@@ -1,32 +1,37 @@
-import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BaseService } from './base.service';
+import {HttpClient} from '@angular/common/http';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {BaseService} from './base.service';
+
 @Injectable()
 export class HeuristicService extends BaseService {
-    userId: any;
+  userId: any;
 
-    constructor(
-        private http: HttpClient,
-    ) {
-        super(http);
-    }
+  constructor(
+    private http: HttpClient,
+  ) {
+    super(http);
+  }
 
-    searchHeuristics() {
-        return this.getAll('Heuristics');
-    }
+  searchHeuristics() {
+    return this.getAll('Heuristics');
+  }
 
-    createHeuristic(heuristic: any) {
-        return this.insert('Heuristics', heuristic);
-    }
+  getNielsen() {
+    return this.getAll('Heuristics/nielsen');
+  }
 
-    updateHeuristic(heuristic: any) {
-        return this.update('Heuristics', heuristic.Id, heuristic);
-    }
+  createHeuristic(heuristic: any) {
+    return this.insert('Heuristics', heuristic);
+  }
 
-    deleteHeuristic(id: number) {
-        return this.delete('Heuristics', id);
-    }
+  updateHeuristic(heuristic: any) {
+    return this.update('Heuristics', heuristic.Id, heuristic);
+  }
+
+  deleteHeuristic(id: number) {
+    return this.delete('Heuristics', id);
+  }
 
 }

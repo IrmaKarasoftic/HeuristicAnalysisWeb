@@ -73,7 +73,7 @@ export class ApplicationComponent implements OnInit {
   }
   edit(obj: any) {
     let item;
-    const idtest = parseInt(obj.Id);
+    const idtest = Number(obj.Id);
     for (let index = 0; index < this.applications.length; index++) {
       const element = this.applications[index];
       if (element.Id === idtest) {
@@ -88,7 +88,7 @@ export class ApplicationComponent implements OnInit {
   }
   delete(obj: any) {
     let item;
-    const idtest = parseInt(obj.Id);
+    const idtest = Number(obj.Id);
     for (let index = 0; index < this.applications.length; index++) {
       const element = this.applications[index];
       if (element.Id === idtest) {

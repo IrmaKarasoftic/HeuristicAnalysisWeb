@@ -25,12 +25,11 @@ export class AuthService extends BaseService {
   }
 
   isAuthenticated() {
-    var a = localStorage.getItem('user_id');
     return (localStorage.getItem('user_id') !== null);
   }
 
   isAdmin() {
-    return (localStorage.getItem('admin') === "true");
+    return (localStorage.getItem('admin') === 'true');
   }
 
   getUserName() {
@@ -57,6 +56,7 @@ export class AuthService extends BaseService {
             console.log(res);
             localStorage.setItem('user_id', JSON.stringify(res.Id));
             localStorage.setItem('email', JSON.stringify(res.Email));
+            // tslint:disable-next-line:prefer-template
             localStorage.setItem('name', JSON.stringify(res.LastName + ' ' + res.FirstName));
             localStorage.setItem('admin', JSON.stringify(res.Admin));
             this.redirectToDasboard(res.Admin);

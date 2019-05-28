@@ -1,4 +1,5 @@
 export class Answer {
+  id: number;
   description: string;
   level: number;
   location: string;

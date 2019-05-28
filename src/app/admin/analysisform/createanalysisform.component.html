@@ -1,36 +1,74 @@
 <div class="container">
-  <h1>Create analysis form</h1>
-  <select name="selectApp" class="d-flex flex-fill" [(ngModel)]="selectedApp" (ngModelChange)="onAppSelect($event)">
-    <option *ngFor="let app of applications" [value]="app.Id">{{app.Name}}</option>
-  </select>
-  <select name="selectVersion" class="d-flex flex-fill" [(ngModel)]="selectedVersion" (ngModelChange)="onVersionSelect($event)">
-    <option *ngFor="let item of appVersions" [value]="item.Id">{{item.VersionName}}</option>
-  </select>
-  
-
-  <div class="search-results">
-      <input [value]="search"
-        ngxTypeahead
-        [taList]="heuristics"
-        taListItemLabel="HeuristicText"
-        placeholder="Start typing"
-        (taSelected)="handleResultSelected($event)">
+  <div class="page-header">
+    <i class="fa fa-user-circle-o page-header-icon"></i>
+    <span class="mleft-5">Create analysis form</span>
+  </div>
+  <div class="row text-center logical-block">
+    <div class="col col-3">
+      <p>Select application:</p>
+      <select
+        name="selectApp"
+        class="d-flex flex-fill select-css"
+        [(ngModel)]="selectedApp"
+        (ngModelChange)="onAppSelect($event)"
+      >
+        <option *ngFor="let app of applications" [value]="app.Id">{{ app.Name }}</option>
+      </select>
     </div>
+  </div>
+  <div class="row text-center logical-block">
+    <div class="col col-3">
+      <p>Select version:</p>
+      <select
+        name="selectVersion"
+        class="d-flex flex-fill select-css"
+        [(ngModel)]="selectedVersion"
+        (ngModelChange)="onVersionSelect($event)"
+      >
+        <option *ngFor="let item of appVersions" [value]="item.Id">{{ item.VersionName }}</option>
+      </select>
+    </div>
+  </div>
 
-  <h2>Heuristics</h2>
+  <div class="title-2">Heuristics</div>
+
+  <div class="d-flex flex-row search">
+    <div class="d-flex flex-column search-text">
+      Search heuristics
+    </div>
+    <div class="d-flex flex-column search-input">
+      <div class="search-results">
+        <input
+          [value]="search"
+          ngxTypeahead
+          [taList]="heuristics"
+          taListItemLabel="HeuristicTitle"
+          placeholder="Start typing"
+          class="form-control"
+          (taSelected)="handleResultSelected($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="disclamer">
+    <p>*Nielsens heuristics will be included automatically.</p>
+  </div>
   <div class="form-check" *ngFor="let heuristic of heuristics">
     <label>
-      <input type="checkbox" [(ngModel)]="heuristic.Checked" name="check"> <span class="label-text">{{heuristic.HeuristicText}}</span>
+      <input type="checkbox" [(ngModel)]="heuristic.Checked" name="check-h" />
+      <span class="label-text">{{ heuristic.HeuristicTitle }} - {{ heuristic.HeuristicText }}</span>
     </label>
   </div>
-  <h1>Assign users</h1>
+  <div class="title-2">Assign users</div>
   <div class="form-check" *ngFor="let group of groups">
     <label>
-      <input type="checkbox"  [(ngModel)]="group.Checked" name="check"> <span class="label-text">{{group.GroupName}}</span>
+      <input type="checkbox" [(ngModel)]="group.Checked" name="check-g" />
+      <span class="label-text">{{ group.GroupName }}</span>
     </label>
   </div>
-  <div class="pull-right">
+  <div class="form-buttons pull-right">
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
     <button type="button" class="btn btn-danger">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)='save()'>Save</button>
   </div>
 </div>

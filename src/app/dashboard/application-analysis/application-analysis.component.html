@@ -1,60 +1,90 @@
-<div class="col-12">
+<div class="container">
   <div *ngFor="let heuristic of appAnalysis?.Heuristics">
     <div>
       <div class="row">
-        <h4>{{heuristic.HeuristicTitle}}</h4>
+        <div class="col-12">
+          <h4>{{ heuristic.HeuristicTitle }}</h4>
+        </div>
       </div>
-      <br>
+      <br />
       <div class="row">
-        <p>{{heuristic.HeuristicText}}</p>
+        <div class="col-12">
+          <p>{{ heuristic.HeuristicText }}</p>
+        </div>
       </div>
     </div>
 
-    <div class="container" *ngFor="let answer of heuristic.Answers">
-      <div id="odgovori">
-        <div class="odgovori">
-          <ul class="list-group-item pitanjeOdgovor">
-            <div class="pitanje">Description</div>
-            <div class="odgovor opisProblema">
-              <textarea rows='3' [(ngModel)]='answer.Description'></textarea>
+    <div *ngFor="let answer of heuristic.Answers">
+      <div id="answers">
+        <div class="answers">
+          <ul class="list-group-item questionAnswer">
+            <div class="question">Description</div>
+            <div class="answer problemDescription">
+              <textarea rows="3" [(ngModel)]="answer.Description"></textarea>
             </div>
           </ul>
-          <ul class="list-group-item pitanjeOdgovor">
-            <div class="pitanje">Level</div>
-            <div class="odgovor">
-              <li class="">
+          <ul class="list-group-item questionAnswer">
+            <div class="question">Level</div>
+            <div class="answer">
+              <li class="severity-level">
                 <label class="radio-inline">
-                  <input type="radio" name="optradio" value="1">Nizak
+                  <input
+                    type="radio"
+                    name="{{ answer.Id }}"
+                    [(ngModel)]="answer.Level"
+                    value="1"
+                  />Low
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="optradio" value="2">Srednji
+                  <input
+                    type="radio"
+                    name="{{ answer.Id }}"
+                    [(ngModel)]="answer.Level"
+                    value="2"
+                  />Medium
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="optradio" value="3">Visok
+                  <input
+                    type="radio"
+                    name="{{ answer.Id }}"
+                    [(ngModel)]="answer.Level"
+                    value="3"
+                  />High
                 </label>
               </li>
             </div>
           </ul>
-          <ul class="list-group-item pitanjeOdgovor">
-            <div class="pitanje">Location</div>
-            <div class="odgovor opisProblema">
-              <textarea rows='2' [(ngModel)]='answer.Location'></textarea>
+          <ul class="list-group-item questionAnswer">
+            <div class="question">Location</div>
+            <div class="answer problemDescription">
+              <textarea rows="2" [(ngModel)]="answer.Location"></textarea>
             </div>
           </ul>
-          <ul class="list-group-item pitanjeOdgovor">
-            <div class="pitanje">Improvement recommendation</div>
-            <div class="odgovor opisProblema">
-              <textarea rows='3' [(ngModel)]='answer.Recommendation'></textarea>
+          <ul class="list-group-item questionAnswer">
+            <div class="question">Improvement recommendation</div>
+            <div class="answer problemDescription">
+              <textarea rows="3" [(ngModel)]="answer.Recommendation"></textarea>
             </div>
           </ul>
-          <ul class="list-group-item pitanjeOdgovor" (paste)="pastePicture($event, answer)">
+          <ul class="list-group-item questionAnswer" (paste)="pastePicture($event, answer)">
             <div class="row">
-              <div class="pitanje">Slika</div>
-              <input #fileInput placeholder="Paste your image here"><span>or</span> <input name="files[]" id="filter_input"
-                class="image-upload-overlay" (change)="onFileChange($event, answer)" required multiple multiple="multiple" type="file">
+              <div class="col-12">
+                <div class="question">Image</div>
+                <input #fileInput placeholder="Paste your image here" /><span class="or">or</span>
+                <input
+                  name="files[]"
+                  id="filter_input"
+                  class="image-upload-overlay"
+                  (change)="onFileChange($event, answer)"
+                  required
+                  multiple
+                  multiple="multiple"
+                  type="file"
+                />
+              </div>
             </div>
-            <div class="image-container" *ngFor='let img of answer.Images'>
-              <img [src]="img.Src" alt="" class="image">
+            <div class="image-container" *ngFor="let img of answer.Images">
+              <img [src]="img.Src" alt="" class="image" />
               <div class="overlay">
                 <div class="images-button">
                   <a><i class="fa fa-trash" (click)="removeFileFromCollection(img, answer)"></i></a>
@@ -62,11 +92,13 @@
               </div>
             </div>
           </ul>
-          <hr>
+          <hr />
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)='AddAnswer()'>Add one more answer</button>
+    <button type="button" class="btn btn-primary" (click)="AddAnswer(heuristic)">
+      Add one more answer
+    </button>
   </div>
-  <button type="button" class="btn btn-primary" (click)='save()'>Save</button>
+  <button type="button" class="btn btn-primary" (click)="save()">Save</button>
 </div>

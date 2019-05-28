@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { HeuristicService } from '../../core/services/heuristics.service';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-heuristics',
@@ -22,9 +22,11 @@ export class HeuristicsComponent implements OnInit {
     HeuristicText: '',
     HeuristicTitle: ''
   };
+  nielsenHeuristics = [];
   public heuristics: Array<string> = [];
   ngOnInit() {
     this.getAll();
+    this.getAllNielsen();
   }
 
   getAll() {
@@ -32,7 +34,23 @@ export class HeuristicsComponent implements OnInit {
       .subscribe(
         (res) => {
           this.heuristics = res;
-          this.setSelectedHeuristicToDefault()
+          this.setSelectedHeuristicToDefault();
+        },
+        (err: any) => {
+          if (err.errors) {
+            console.log(err.errors[0]);
+          } else if (err.hasError) {
+            console.log(err.message);
+          }
+        }
+      );
+  }
+
+  getAllNielsen() {
+    this.heuristicService.getNielsen()
+      .subscribe(
+        (res) => {
+          this.nielsenHeuristics = res;
         },
         (err: any) => {
           if (err.errors) {
@@ -47,12 +65,12 @@ export class HeuristicsComponent implements OnInit {
   setSelectedHeuristicToDefault(): any {
     this.selectedHeuristic = JSON.parse(JSON.stringify(this.defaultSelectedHeuristic));
   }
-  
+
   createHeuristic() {
     this.heuristicService.createHeuristic(this.selectedHeuristic).subscribe(
       (res) => {
         this.getAll();
-        this.closeCreateHeuristicDialog();        
+        this.closeCreateHeuristicDialog();
       },
       (err: any) => {
         if (err.errors) {
@@ -60,11 +78,10 @@ export class HeuristicsComponent implements OnInit {
         } else if (err.hasError) {
           console.log(err.message);
         }
-        this.closeCreateHeuristicDialog();        
+        this.closeCreateHeuristicDialog();
       }
     );
   }
-
 
   updateHeuristic() {
     this.heuristicService.updateHeuristic(this.selectedHeuristic).subscribe(
@@ -101,7 +118,7 @@ export class HeuristicsComponent implements OnInit {
   }
 
   openCreateHeuristicDialog() {
-    this.setSelectedHeuristicToDefault()
+    this.setSelectedHeuristicToDefault();
     this.createHeuristicDialog.show();
   }
 
@@ -117,16 +134,16 @@ export class HeuristicsComponent implements OnInit {
 
   closeCreateHeuristicDialog() {
     this.createHeuristicDialog.hide();
-    this.setSelectedHeuristicToDefault()
+    this.setSelectedHeuristicToDefault();
   }
 
   closeUpdateHeuristicDialog() {
     this.updateHeuristicDialog.hide();
-    this.setSelectedHeuristicToDefault()
+    this.setSelectedHeuristicToDefault();
   }
 
   closeDeleteHeuristicDialog() {
     this.deleteHeuristicDialog.hide();
-    this.setSelectedHeuristicToDefault()
+    this.setSelectedHeuristicToDefault();
   }
 }

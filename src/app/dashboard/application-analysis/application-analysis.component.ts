@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AnalysisService } from 'src/app/core/services/analysis.service';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UnsubscribeOnDestroy } from 'src/app/core/common/unsubscribe-on-destroy';
+import { AnalysisService } from 'src/app/core/services/analysis.service';
 import { Answer } from '../dashboard.model';
 
 @Component({
   selector: 'app-application-analysis',
   templateUrl: './application-analysis.component.html',
-  styleUrls: ['./application-analysis.component.scss']
+  styleUrls: ['./application-analysis.component.scss'],
 })
 export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implements OnInit {
   urlParams: any;
@@ -16,55 +16,44 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
 
   answers: Answer[] = [];
 
-  a1: Answer = {
-    description: 'Opis1',
-    location: 'Lokacija1',
-    level: 1,
-    recommendation: 'Preporuka1',
-    images: []
-  };
   default: Answer = {
+    id: 0,
     description: '',
     location: '',
     level: 1,
     recommendation: '',
-    images: []
+    images: [],
   };
   image: File;
   imageSrc: any;
   @ViewChild('fileInput') fileInput;
   formData: any;
 
-  
   constructor(private route: ActivatedRoute, private analysisService: AnalysisService) {
     super();
   }
   ngOnInit() {
-    this.answers.push(this.a1);
-    this.route.params.pipe(tap(params => this.urlParams = params))
-      .subscribe(() => {
-        var analysisId = parseInt(this.urlParams.id);
-          var appAnalysis = this.analysisService.getAnalysisById(analysisId).subscribe(
-            (res) => {
-              this.appAnalysis = res;
-              console.log(res);
-            },
-            (err: any) => {
-              if (err.errors) {
-                console.log(err.errors[0]);
-              } else if (err.hasError) {
-                console.log(err.message);
-              }
-            }
-          );;
-          console.log(appAnalysis);
-      });
-    
+    this.route.params.pipe(tap(params => (this.urlParams = params))).subscribe(() => {
+      const analysisId = Number(this.urlParams.id);
+      const appAnalysis = this.analysisService.getAnalysisById(analysisId).subscribe(
+        res => {
+          this.appAnalysis = res;
+          console.log(res);
+        },
+        (err: any) => {
+          if (err.errors) {
+            console.log(err.errors[0]);
+          } else if (err.hasError) {
+            console.log(err.message);
+          }
+        }
+      );
+    });
   }
 
   save() {
     this.analysisService.updateAnalysis(this.appAnalysis).subscribe(
-      (res) => {
+      res => {
         alert(res);
       },
       (err: any) => {
@@ -76,22 +65,21 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
       }
     );
   }
-  
   createModel(analysis) {
-    var a : any= {};
+    const a: any = {};
     a.analysisId = analysis.AnalysisId;
     a.userId = 1;
     a.heuristics = analysis.Heuristics;
     return a;
   }
-  AddAnswer() {
-    this.answers.push(this.default);
+  AddAnswer(item) {
+    item.Answers.push(this.default);
   }
 
   pastePicture(event: ClipboardEvent, item) {
-    event.clipboardData.getData('image/jpg')
+    event.clipboardData.getData('image/jpg');
     this.image = event.clipboardData.files[0];
-    this.getBase64(this.image, item)
+    this.getBase64(this.image, item);
   }
 
   getBase64(image, item) {
@@ -100,11 +88,11 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
       reader.readAsDataURL(image);
       reader.onload = e => {
         this.imageSrc = reader.result;
-        var model = {
-          Src : this.imageSrc.toString(),
-        }
+        const model = {
+          Src: this.imageSrc.toString(),
+        };
         item.Images.push(model);
-      }
+      };
     }
   }
 

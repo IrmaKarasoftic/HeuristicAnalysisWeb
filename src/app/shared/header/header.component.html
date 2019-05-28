@@ -1,9 +1,17 @@
-<div *ngIf='isLoggedIn'>
+<div *ngIf="isLoggedIn">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a href="../" class="navbar-brand">Heuristička analiza</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-        aria-expanded="false" aria-label="Toggle navigation" style="">
+      <a href="../" class="navbar-brand">Heuristic evaluation</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        style=""
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -13,8 +21,13 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               User panel
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -23,15 +36,22 @@
             </div>
           </li>
 
-          <li class="nav-item dropdown" *ngIf='isAdmin'>
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+          <li class="nav-item dropdown" *ngIf="isAdmin">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               Admin panel
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" [routerLink]="['/admin/applications']">Applications</a>
               <a class="dropdown-item" [routerLink]="['/admin/heuristics']">Heuristics</a>
-              <a class="dropdown-item" [routerLink]="['/admin/create-analysis']">Create analysis form</a>
+              <a class="dropdown-item" [routerLink]="['/admin/create-analysis']"
+                >Create analysis form</a
+              >
               <a class="dropdown-item" [routerLink]="['/admin/users']">Users</a>
             </div>
           </li>
@@ -39,10 +59,9 @@
 
         <ul class="navbar-nav pull-right">
           <li class="nav-item">
-            <a class="nav-link" (click)="logout()" >Log Out</a>
+            <a class="nav-link" (click)="logout()">Log Out</a>
           </li>
         </ul>
-
       </div>
     </div>
   </nav>

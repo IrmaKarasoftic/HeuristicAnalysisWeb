@@ -19,15 +19,15 @@
               <div class="col-md-2">Email</div>
               <div class="col-md-2">Date of birth</div>
               <div class="col-md-2">Occupation</div>
-              <div class="col-md-4 action-header">Actions</div>
+              <div class="col-md-2 action-header">Actions</div>
             </div>
             <div class="tab-table-row" *ngFor="let item of users">
               <div class="col-md-2">{{item.FirstName}}</div>
               <div class="col-md-2">{{item.LastName}}</div>
-              <div class="col-md-2">{{item.Email}}</div>
+              <div class="col-md-2 overflow-hidden">{{item.Email}}</div>
               <div class="col-md-2">{{item.DateOfBirth| date }}</div>
               <div class="col-md-2">{{item.Occupation}}</div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <div class="btn-container pull-right">
                   <button class="btn btn-primary circle-btn" type="button" (click)="openUpdateUserDialog(item)"><i
                       class="fa
@@ -122,7 +122,7 @@
 <app-dialog #CreateUserDialog closeButtonLabel="Close" submitButtonLabel="Create" (closeEvent)="closeCreateUserDialog()"
   (submitEvent)="createUser()">
   <div header>
-    <h2>Create user</h2>
+    <h2 class="title-2">Create user</h2>
   </div>
   <div content class="d-flex flex-column">
     <label>First name</label>

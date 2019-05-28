@@ -1,18 +1,24 @@
-<table class="table" *ngFor='let item of analysis'>
-  <thead>
-    <th scope="col">Application name</th>
-    <th scope="col">Application URL</th>
-    <th scope="col">Version</th>
-    <th scope="col">Actions</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>{{item.Aplikacija.Name}}</td>
-      <td>{{item.Aplikacija.Url}}</td>
-      <td>{{item.Verzija.VersionName}}</td>
-      <td>
-        <button class="btn btn-secondary btn-manage" type="button" (click)='openAnalysis(item)'>Analyze</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="text-center title-2">Welcome to heuristic analysis portal</div>
+  <div class="message">This is the list of applications available for analysis</div>
+  <div class="tab-table">
+    <div class="tab-table-header">
+      <div class="col-md-4">Application name</div>
+      <div class="col-md-4">Application URL</div>
+      <div class="col-md-2">Version</div>
+      <div class="col-md-2">Actions</div>
+    </div>
+    <div class="tab-table-row" *ngFor="let item of analysis">
+      <div class="col-md-4">{{item.Aplikacija.Name}}</div>
+      <div class="col-md-4">{{item.Aplikacija.Url}}</div>
+      <div class="col-md-2">{{item.Verzija.VersionName}}</div>
+      <div class="col-md-2 pull-right">
+        <div class="btn-container pull-right">
+          <button class="btn btn-primary" type="button" (click)="openAnalysis(item)">
+            Analyze this application
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
