@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
-import { Group, User } from './users.model';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { Group, User } from './users.model';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
   @ViewChild('CreateUserGroupDialog') public createUserGroupDialog: DialogComponent;
@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
   handleUser: any = {
     UserId: null,
     GroupId: null,
-    Assign: false
+    Assign: false,
   };
   groups: Group[] = [];
   tabindex = 1;
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
     Name: '',
     Occupation: '',
     DateOfBirth: null,
-    Admin: false
+    Admin: false,
   };
   selectedUser: any = {
     Id: null,
@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
     LastName: '',
     Name: '',
     DateOfBirth: null,
-    Admin: false
+    Admin: false,
   };
 
   defaultSelectedUserGroup: any = {
@@ -53,10 +53,10 @@ export class UsersComponent implements OnInit {
   };
   groupUsers: any = {
     Id: null,
-    Users: null
+    Users: null,
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   public model: any;
   ngOnInit() {
@@ -65,58 +65,55 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.userService.searchUsers()
-      .subscribe(
-        (res) => {
-          this.users = res;
-          this.setSelectedUserToDefault();
-          this.setSelectedUserGroupToDefault();
-        },
-        (err: any) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    this.userService.searchUsers().subscribe(
+      res => {
+        this.users = res;
+        this.setSelectedUserToDefault();
+        this.setSelectedUserGroupToDefault();
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
         }
-      );
+      }
+    );
   }
 
   getAllUserGroups() {
-    this.userService.searchGroups()
-      .subscribe(
-        (res) => {
-          this.groups = res;
-        },
-        (err: any) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    this.userService.searchGroups().subscribe(
+      res => {
+        this.groups = res;
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
         }
-      );
+      }
+    );
   }
 
   getAllGroupUsers(id) {
-    this.userService.getUsersForGroups(id)
-      .subscribe(
-        (res) => {
-          this.groupUsers = res;
-        },
-        (err: any) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    this.userService.getUsersForGroups(id).subscribe(
+      res => {
+        this.groupUsers = res;
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
         }
-      );
+      }
+    );
   }
 
   createUser() {
     this.userService.createUser(this.selectedUser).subscribe(
-      (res) => {
+      res => {
         this.getAllUsers();
         this.closeCreateUserDialog();
       },
@@ -132,9 +129,8 @@ export class UsersComponent implements OnInit {
   }
 
   updateUser() {
-
     this.userService.updateUser(this.selectedUser).subscribe(
-      (res) => {
+      res => {
         this.getAllUsers();
         this.closeUpdateUserDialog();
       },
@@ -151,7 +147,7 @@ export class UsersComponent implements OnInit {
 
   deleteUser() {
     this.userService.deleteUser(this.selectedUser.Id).subscribe(
-      (res) => {
+      res => {
         this.getAllUsers();
         this.closeDeleteUserDialog();
       },
@@ -168,7 +164,7 @@ export class UsersComponent implements OnInit {
 
   createUserGroup() {
     this.userService.createUserGroup(this.selectedUserGroup).subscribe(
-      (res) => {
+      res => {
         this.getAllUserGroups();
         this.closeCreateUserGroupDialog();
       },
@@ -185,7 +181,7 @@ export class UsersComponent implements OnInit {
 
   updateUserGroup() {
     this.userService.updateUserGroup(this.selectedUserGroup).subscribe(
-      (res) => {
+      res => {
         this.getAllUserGroups();
         this.closeUpdateUserGroupDialog();
       },
@@ -202,7 +198,7 @@ export class UsersComponent implements OnInit {
 
   deleteUserGroup() {
     this.userService.deleteUserGroup(this.selectedUserGroup.Id).subscribe(
-      (res) => {
+      res => {
         this.getAllUserGroups();
         this.closeDeleteUserGroupDialog();
       },
@@ -228,24 +224,21 @@ export class UsersComponent implements OnInit {
   }
 
   handleUserData(user) {
-    this.handleUser.UserId = user.Id,
-      this.handleUser.GroupId = this.selectedUserGroup.Id;
-    this.userService.assignUser(this.handleUser)
-      .subscribe(
-        (res) => {
-          var foundIndex = this.groupUsers.Users.indexOf(user);
-          this.groupUsers.Users[foundIndex].Assigned = !this.groupUsers.Users[foundIndex].Assigned;
-        },
-        (err: any) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    (this.handleUser.UserId = user.Id), (this.handleUser.GroupId = this.selectedUserGroup.Id);
+    this.userService.assignUser(this.handleUser).subscribe(
+      res => {
+        var foundIndex = this.groupUsers.Users.indexOf(user);
+        this.groupUsers.Users[foundIndex].Assigned = !this.groupUsers.Users[foundIndex].Assigned;
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
         }
-      );
+      }
+    );
   }
-
 
   setSelectedUserToDefault(): any {
     this.selectedUser = JSON.parse(JSON.stringify(this.defaultSelectedUser));
@@ -254,7 +247,6 @@ export class UsersComponent implements OnInit {
   setSelectedUserGroupToDefault(): any {
     this.selectedUserGroup = JSON.parse(JSON.stringify(this.defaultSelectedUserGroup));
   }
-
 
   openCreateUserGroupDialog() {
     this.setSelectedUserGroupToDefault();
@@ -273,7 +265,7 @@ export class UsersComponent implements OnInit {
 
   openManageUsersDialog(group) {
     this.selectedUserGroup = JSON.parse(JSON.stringify(group));
-    this.getAllGroupUsers(group.Id)
+    this.getAllGroupUsers(group.Id);
     this.manageUsersDialog.show();
   }
 
@@ -325,5 +317,4 @@ export class UsersComponent implements OnInit {
   closeManageUsersDialog() {
     this.manageUsersDialog.hide();
   }
-
 }

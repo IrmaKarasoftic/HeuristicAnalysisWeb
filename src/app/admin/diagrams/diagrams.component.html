@@ -1,0 +1,65 @@
+<div *ngIf="!showGraph">
+  <div class="row text-center logical-block">
+    <div class="col col-3">
+      <p>Select application:</p>
+      <select
+        name="selectApp"
+        class="d-flex flex-fill select-css"
+        [(ngModel)]="selectedApp"
+        (ngModelChange)="onAppSelect($event)"
+      >
+        <option *ngFor="let app of applications" [value]="app.Id">{{ app.Name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row text-center logical-block">
+    <div class="col col-3">
+      <p>Select version:</p>
+      <select
+        name="selectVersion"
+        class="d-flex flex-fill select-css"
+        [(ngModel)]="selectedVersion"
+        (ngModelChange)="onVersionSelect($event)"
+      >
+        <option *ngFor="let item of appVersions" [value]="item.Id">{{ item.VersionName }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row text-center logical-block">
+    <button type="button" class="btn btn-primary" (click)="goToDiagrams()">OK</button>
+  </div>
+</div>
+
+<div *ngIf="showGraph">
+  <div class="container d-flex align-items-center justify-content-center">
+    <table>
+      <tr>
+        <td style="width:700px;height:50%"><canvas id="pieChart"></canvas></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="container">
+    <div *ngIf="data !== null && data.Answers !== null">
+      <div *ngFor="let item of data.Answers" class="report-answers">
+        <div
+          class="card"
+          [ngClass]="{
+            'border-danger': item.Level === 3,
+            'border-warning': item.Level === 2,
+            'border-info': item.Level === 1
+          }"
+        >
+          <div class="card-body">
+            <h4 class="card-title">Description: {{ item.Description }}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Location: {{ item.Location }}</h6>
+            <p class="card-text">Recommendation: {{ item.Recommendation }}</p>
+            <div class="image-container" *ngFor="let img of item.Images">
+              <img [src]="img.Img" alt="" class="image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
