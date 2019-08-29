@@ -18,6 +18,10 @@ export class VersionDiagramsComponent implements OnInit {
     Answers: null,
     DiagramModel: null,
   };
+  tableData: any = {
+    TableItems: null,
+    DiagramModel: null,
+  };
   constructor(
     public applicationService: ApplicationsService,
     private diagramsService: DiagramsService,
@@ -48,11 +52,24 @@ export class VersionDiagramsComponent implements OnInit {
             },
             options: {
               title: {
-                text: 'Pie Chart',
+                text: '',
                 display: true,
               },
             },
           });
+        },
+        (err: any) => {
+          if (err.errors) {
+            console.log(err.errors[0]);
+          } else if (err.hasError) {
+            console.log(err.message);
+          }
+        }
+      );
+
+      this.diagramsService.getTableDiagramByVersionId(versionId).subscribe(
+        res => {
+          this.tableData = res;
         },
         (err: any) => {
           if (err.errors) {

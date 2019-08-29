@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent implements OnInit {
-
   navbarOpen = false;
   messages: any;
   isAdmin = false;
   isLoggedIn = false;
-  constructor(private router: Router,
-    private authService: AuthService,
-  ) { }
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.isAdmin = this.authService.isAdmin();
     this.isLoggedIn = this.isAuthenticated();
+    this.router.events.subscribe(event => {
+      this.isAdmin = this.authService.isAdmin();
+      if (event instanceof NavigationStart) {
+        this.isLoggedIn = this.isAuthenticated();
+      }
+    });
   }
 
   toggleNavbar() {
@@ -31,13 +33,10 @@ export class HeaderComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-  signIn() {
-    this.router.navigate(['/login']);
-  }
-
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
+    this.isAdmin = false;
   }
 }

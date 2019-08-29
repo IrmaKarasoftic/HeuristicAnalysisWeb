@@ -1,9 +1,17 @@
 .circle-btn {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    font-size: 14px;
-    border-radius: 50px;
-    width: 25px;
-    height: 25px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  font-size: 14px;
+  border-radius: 50px;
+  width: 25px;
+  height: 25px;
+}
+
+.heuristics-list {
+  margin-top: 50px;
+}
+
+.heuristics-list-item {
+  margin: 30px 0;
 }

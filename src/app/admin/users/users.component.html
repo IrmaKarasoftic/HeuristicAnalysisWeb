@@ -161,24 +161,40 @@
     <h2 class="title-2">Create user</h2>
   </div>
   <div content class="d-flex flex-column">
-    <label>First name</label>
-    <input type="text" id="firstName" [(ngModel)]="selectedUser.FirstName" />
-    <label>Last name</label>
-    <input type="text" id="lastName" [(ngModel)]="selectedUser.LastName" />
-    <label>Email</label>
-    <input type="email" id="lastName" [(ngModel)]="selectedUser.Email" />
-    <label>Occupation</label>
-    <input type="text" id="occupation" [(ngModel)]="selectedUser.Occupation" />
-    <label>Date of birth</label>
-    <input
-      class="form-control"
-      placeholder="yyyy-mm-dd"
-      (click)="d.toggle()"
-      name="dp"
-      [(ngModel)]="selectedUser.DateOfBirth"
-      ngbDatepicker
-      #d="ngbDatepicker"
-    />
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="selectedUser.FirstName" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="selectedUser.LastName" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="selectedUser.Email" />
+    </div>
+    <div class="form-group">
+      <label for="occupation">Occupation</label>
+      <input
+        type="text"
+        class="form-control"
+        id="occupation"
+        [(ngModel)]="selectedUser.Occupation"
+      />
+    </div>
+    <div class="form-group">
+      <label for="date">Date of birth</label>
+      <input
+        class="form-control"
+        placeholder="yyyy-mm-dd"
+        (click)="d.toggle()"
+        name="dp"
+        [(ngModel)]="selectedUser.DateOfBirth"
+        ngbDatepicker
+        #d="ngbDatepicker"
+        id="date"
+      />
+    </div>
   </div>
   <div footer></div>
 </app-dialog>
@@ -194,48 +210,59 @@
     <div class="custom-modal-header basic-modal-header"><span>Update user</span></div>
   </div>
   <div content class="d-flex flex-column">
-    <label class="no-margin" for="firstName">First name</label>
-    <input
-      type="text"
-      class="form-control mbottom-10"
-      id="firstName"
-      name="firstName"
-      [(ngModel)]="selectedUser.FirstName"
-    />
-    <label class="no-margin" for="lastName">Last name</label>
-    <input
-      type="text"
-      class="form-control mbottom-10"
-      id="lastName"
-      name="lastName"
-      [(ngModel)]="selectedUser.LastName"
-    />
-    <label class="no-margin" for="email">Email</label>
-    <input
-      type="text"
-      class="form-control mbottom-10"
-      id="email"
-      name="email"
-      [(ngModel)]="selectedUser.Email"
-    />
-    <label class="no-margin" for="occupation">Occupation</label>
-    <input
-      type="text"
-      class="form-control mbottom-10"
-      id="occupation"
-      name="occupation"
-      [(ngModel)]="selectedUser.Occupation"
-    />
-    <label class="no-margin">Date of birth</label>
-    <input
-      class="form-control"
-      placeholder="yyyy-mm-dd"
-      (click)="d1.toggle()"
-      name="dp2"
-      [(ngModel)]="selectedUser.DateOfBirth"
-      ngbDatepicker
-      #d1="ngbDatepicker"
-    />
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input
+        type="text"
+        class="form-control mbottom-10"
+        id="firstName"
+        name="firstName"
+        [(ngModel)]="selectedUser.FirstName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input
+        type="text"
+        class="form-control mbottom-10"
+        id="lastName"
+        name="lastName"
+        [(ngModel)]="selectedUser.LastName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control mbottom-10"
+        id="email"
+        name="email"
+        [(ngModel)]="selectedUser.Email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="occupation">Occupation</label>
+      <input
+        type="text"
+        class="form-control mbottom-10"
+        id="occupation"
+        name="occupation"
+        [(ngModel)]="selectedUser.Occupation"
+      />
+    </div>
+    <div class="form-group">
+      <label class="no-margin" for="date">Date of birth</label>
+      <input
+        class="form-control"
+        placeholder="yyyy-mm-dd"
+        (click)="d1.toggle()"
+        name="dp2"
+        [(ngModel)]="selectedUser.DateOfBirth"
+        ngbDatepicker
+        id="date"
+        #d1="ngbDatepicker"
+      />
+    </div>
   </div>
   <div footer></div>
 </app-dialog>
@@ -334,7 +361,7 @@
   (submitEvent)="updateUserGroup()"
 >
   <div header>
-    <div class="custom-modal-header basic-modal-header"><span>Update User Group</span></div>
+    <div class="custom-modal-header basic-modal-header"><span>Update User Group Name</span></div>
   </div>
   <div content class="d-flex flex-column">
     <input

@@ -2,20 +2,37 @@
   <div id="formContent">
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="https://dumielauxepices.net/sites/default/files/log-clipart-user-login-672384-8045785.png" id="icon" alt="User Icon" />
+      <img
+        src="https://dumielauxepices.net/sites/default/files/log-clipart-user-login-672384-8045785.png"
+        id="icon"
+        alt="User Icon"
+      />
     </div>
 
     <!-- Login Form -->
     <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)]="model.username">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]="model.password">
-      <input type="submit" class="fadeIn fourth" (click)='login()' value="Log In">
+      <input
+        type="text"
+        id="login"
+        class="fadeIn second"
+        name="login"
+        placeholder="E-mail or Username"
+        [(ngModel)]="model.username"
+      />
+      <input
+        type="text"
+        id="password"
+        class="fadeIn third"
+        name="login"
+        placeholder="Password"
+        [(ngModel)]="model.password"
+      />
+      <input type="submit" class="fadeIn fourth" (click)="login()" value="Log In" />
     </form>
 
     <!-- Remind Passowrd -->
     <!-- <div id="formFooter">
       <a class="underlineHover" href="#">Forgot Password?</a>
     </div> -->
-
   </div>
 </div>

@@ -39,11 +39,16 @@
 
 .severity-level {
   label {
-    margin-right: 15px;
+    margin-right: 45px;
     input {
-      padding-right: 10px;
+      margin-right: 5px;
     }
   }
+}
+
+.add-answer-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .image-container {
@@ -88,4 +93,8 @@
 
 .or {
   margin: 0 10px;
+}
+
+.heuristic-evaluation-item {
+  margin-top: 70px;
 }

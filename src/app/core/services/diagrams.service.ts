@@ -17,4 +17,8 @@ export class DiagramsService extends BaseService {
   getDiagramsByVersionId(id) {
     return this.get('Diagrams', id);
   }
+
+  getTableDiagramByVersionId(id) {
+    return this.get('Diagrams/table', id);
+  }
 }

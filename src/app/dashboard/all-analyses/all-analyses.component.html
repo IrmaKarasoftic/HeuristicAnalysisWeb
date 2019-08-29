@@ -12,16 +12,19 @@
       <div class="col-md-4">{{ item.Aplikacija.Name }}</div>
       <div class="col-md-4">{{ item.Aplikacija.Url }}</div>
       <div class="col-md-2">{{ item.Verzija.VersionName }}</div>
-      <div class="col-md-2 pull-right">
-        <div class="btn-container pull-right">
+      <div class="col-md-2">
+        <div class="btn-container text-center">
           <button
             class="btn btn-primary"
             type="button"
             (click)="openAnalysis(item)"
             *ngIf="!item.Analyzed"
           >
-            Analyze this application
+            Evaluate
           </button>
+          <div *ngIf="item.Analyzed" class="text-center">
+            <i class="fa fa-check"> </i>
+          </div>
         </div>
       </div>
     </div>

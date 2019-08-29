@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
   @Input() item: any;
   @Input() flipped: boolean;
   @Output() onEdit = new EventEmitter<any>();
@@ -16,9 +15,7 @@ export class CardComponent implements OnInit {
   @Output() onVersionEdit = new EventEmitter<any>();
   @Output() onVersionDelete = new EventEmitter<any>();
 
-  ngOnInit() {
-    console.log('iz card', this.item);
-  }
+  ngOnInit() {}
   edit(item: any) {
     console.log(item);
     this.onEdit.emit(item);

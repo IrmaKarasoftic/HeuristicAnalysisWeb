@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnalysisService } from '../../core/services/analysis.service';
 import { ApplicationsService } from '../../core/services/applications.service';
 import { HeuristicService } from '../../core/services/heuristics.service';
@@ -27,7 +28,8 @@ export class CreateAnalysisFormComponent implements OnInit {
     public applicationService: ApplicationsService,
     public heuristicService: HeuristicService,
     public userService: UserService,
-    public analysisService: AnalysisService
+    public analysisService: AnalysisService,
+    private router: Router
   ) {}
   public applications: Array<any> = [];
   public versions: Array<any> = [];
@@ -113,9 +115,7 @@ export class CreateAnalysisFormComponent implements OnInit {
     this.createAppModel.groups = this.groups;
     this.analysisService.createAnalysis(this.createAppModel).subscribe(
       res => {
-        this.getAllApps();
-        this.getAllHeuristics();
-        this.getAllUserGroups();
+        this.router.navigate(['/admin/applications']);
       },
       (err: any) => {
         if (err.errors) {

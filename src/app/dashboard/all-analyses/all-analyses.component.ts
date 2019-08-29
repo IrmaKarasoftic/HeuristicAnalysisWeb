@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnalysisService } from '../../core/services/analysis.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AnalysisService } from '../../core/services/analysis.service';
 
 @Component({
   selector: 'app-all-analyses',
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class AllAnalysesComponent implements OnInit {
   allAnalysis: any;
   analysis: any;
-
+  userId: any;
   constructor(
     private analysisService: AnalysisService,
     private router: Router,
@@ -19,8 +19,8 @@ export class AllAnalysesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const userId = this.authService.getUserId();
-    this.analysisService.getAnalysisByUserId(userId).subscribe(
+    this.userId = this.authService.getUserId();
+    this.analysisService.getAnalysisByUserId(this.userId).subscribe(
       res => {
         this.analysis = res;
         console.log(res);
@@ -38,7 +38,7 @@ export class AllAnalysesComponent implements OnInit {
     if (!item.Created) {
       const a: any = {};
       a.analysisId = item.AnalysisFormId;
-      a.userId = 1;
+      a.userId = this.userId;
       this.analysisService.postAnalysisAnswers(a).subscribe(
         res => {
           this.router.navigate(['/dashboard/app-analysis', res.Id]);

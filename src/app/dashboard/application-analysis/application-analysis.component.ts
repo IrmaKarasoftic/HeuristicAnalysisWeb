@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UnsubscribeOnDestroy } from 'src/app/core/common/unsubscribe-on-destroy';
 import { AnalysisService } from 'src/app/core/services/analysis.service';
@@ -29,7 +30,11 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   @ViewChild('fileInput') fileInput;
   formData: any;
 
-  constructor(private route: ActivatedRoute, private analysisService: AnalysisService) {
+  constructor(
+    private route: ActivatedRoute,
+    private analysisService: AnalysisService,
+    private router: Router
+  ) {
     super();
   }
   ngOnInit() {
@@ -54,7 +59,7 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
   save() {
     this.analysisService.updateAnalysis(this.appAnalysis).subscribe(
       res => {
-        alert(res);
+        this.router.navigate(['/dashboard/analysis']);
       },
       (err: any) => {
         if (err.errors) {
@@ -73,7 +78,8 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
     return a;
   }
   AddAnswer(item) {
-    item.Answers.push(this.default);
+    const newObj = Object.assign({}, this.default);
+    item.Answers.push(newObj);
   }
 
   pastePicture(event: ClipboardEvent, item) {

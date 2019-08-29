@@ -1,5 +1,19 @@
 <div class="container">
-  <div *ngFor="let heuristic of appAnalysis?.Heuristics">
+  <div class="page-header">
+    <i class="fa fa-edit page-header-icon"></i>
+    <span class="mleft-5">Heuristic evaluation</span>
+  </div>
+  <p>
+    This heuristic evaluation form is meant to test the usability and user experience for certain
+    tasks that can be completed on (insert website name). We can better understand the user
+    experience through evaluating certain tasks that a user would come to the website to complete.
+  </p>
+  <p>
+    Bellow are tasks that a user may come to the website to complete. Please evaluate these tasks,
+    and the processes for completing these tasks from a user perspective based on the given
+    heuristics.
+  </p>
+  <div *ngFor="let heuristic of appAnalysis?.Heuristics" class="heuristic-evaluation-item">
     <div>
       <div class="row">
         <div class="col-12">
@@ -96,9 +110,11 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="AddAnswer(heuristic)">
-      Add one more answer
-    </button>
+    <div class="add-answer-button">
+      <button type="button" class="btn btn-primary" (click)="AddAnswer(heuristic)">
+        Add one more answer
+      </button>
+    </div>
   </div>
   <button type="button" class="btn btn-primary" (click)="save()">Save</button>
 </div>
