@@ -8,7 +8,7 @@ import { AnalysisService } from '../../core/services/analysis.service';
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  styleUrls: ['./application.component.scss'],
 })
 export class ApplicationComponent implements OnInit {
   @ViewChild('CreateVersionDialog') public createVersionDialog: DialogComponent;
@@ -23,53 +23,56 @@ export class ApplicationComponent implements OnInit {
     Id: null,
     VersionName: '',
     Date: new Date(),
-    ApplicationId: null
+    ApplicationId: null,
   };
   selectedVersion: any = {
     Id: null,
     VersionName: '',
     Date: new Date(),
-    ApplicationId: null
+    ApplicationId: null,
   };
   applications: Application[] = [];
   selectedApplication: any = {
     Id: null,
     Name: '',
-    Url: ''
+    Url: '',
   };
+  selectedAppType: any;
   defaultSelectedApplication: any = {
     Id: null,
     Name: '',
-    Url: ''
+    Url: '',
   };
   analysis: any;
 
-  constructor(private applicationService: ApplicationsService, private analysisService: AnalysisService,
-    private versionService: VersionsService) { }
+  constructor(
+    private applicationService: ApplicationsService,
+    private analysisService: AnalysisService,
+    private versionService: VersionsService
+  ) {}
 
   ngOnInit() {
     this.getAllApps();
   }
 
   getAllApps() {
-    this.applicationService.searchApplications()
-      .subscribe(
-        (res) => {
-          this.applications = res;
-          this.applications.forEach(x => {
-            x.flipped = false;
-          });
-          console.log('apps', this.applications);
-          this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
-        },
-        (err: any) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    this.applicationService.searchApplications().subscribe(
+      res => {
+        this.applications = res;
+        this.applications.forEach(x => {
+          x.flipped = false;
+        });
+        console.log('apps', this.applications);
+        this.selectedVersion = JSON.parse(JSON.stringify(this.defaultSelectedVersion));
+      },
+      (err: any) => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
         }
-      );
+      }
+    );
   }
   edit(obj: any) {
     let item;
@@ -82,9 +85,7 @@ export class ApplicationComponent implements OnInit {
     }
     if (item) {
       this.openUpdateApplicationDialog(item);
-
     }
-
   }
   delete(obj: any) {
     let item;
@@ -97,32 +98,35 @@ export class ApplicationComponent implements OnInit {
     }
     if (item) {
       this.openDeleteApplicationDialog(item);
-
     }
   }
 
   getAnalysisById(id) {
-    this.analysisService.getAnalysisById(id)
-      .subscribe(
-        res => {
-          if (res) {
-            this.analysis = res;
-            console.log(this.analysis);
-          }
-        },
-        (err) => {
-          if (err.errors) {
-            console.log(err.errors[0]);
-          } else if (err.hasError) {
-            console.log(err.message);
-          }
+    this.analysisService.getAnalysisById(id).subscribe(
+      res => {
+        if (res) {
+          this.analysis = res;
+          console.log(this.analysis);
         }
-      );
+      },
+      err => {
+        if (err.errors) {
+          console.log(err.errors[0]);
+        } else if (err.hasError) {
+          console.log(err.message);
+        }
+      }
+    );
+  }
+
+  onAppTypeChanged($event) {
+    this.selectedAppType = $event;
   }
 
   createApplication() {
+    this.selectedApplication.ApplicationType = this.selectedAppType;
     this.applicationService.createApplication(this.selectedApplication).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.closeCreateApplicationDialog();
       },
@@ -140,7 +144,7 @@ export class ApplicationComponent implements OnInit {
   createVersion() {
     this.selectedVersion.ApplicationId = this.selectedApplication.Id;
     this.applicationService.createVersion(this.selectedVersion).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.closeCreateVersionDialog();
       },
@@ -157,7 +161,7 @@ export class ApplicationComponent implements OnInit {
 
   updateApplication() {
     this.applicationService.updateApplication(this.selectedApplication).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.closeUpdateApplicationDialog();
       },
@@ -174,7 +178,7 @@ export class ApplicationComponent implements OnInit {
 
   deleteApplication() {
     this.applicationService.deleteApplications(this.selectedApplication.Id).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.closeDeleteApplicationDialog();
       },
@@ -189,10 +193,9 @@ export class ApplicationComponent implements OnInit {
     );
   }
 
-
   updateVersion() {
     this.versionService.updateVersion(this.selectedVersion).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.updateVersionDialog.hide();
       },
@@ -203,14 +206,13 @@ export class ApplicationComponent implements OnInit {
           console.log(err.message);
         }
         this.updateVersionDialog.hide();
-
       }
     );
   }
 
   deleteVersion() {
     this.versionService.deleteVersion(this.selectedVersion.Id).subscribe(
-      (res) => {
+      res => {
         this.getAllApps();
         this.updateVersionDialog.hide();
       },
@@ -242,7 +244,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   openCreateApplicationDialog() {
-    this.setSelectedApplicationToDefault()
+    this.setSelectedApplicationToDefault();
     this.createApplicationDialog.show();
   }
 
@@ -263,7 +265,7 @@ export class ApplicationComponent implements OnInit {
 
   openCreateVersionDialog(application) {
     this.selectedApplication = application;
-    this.setSelectedVersionToDefault()
+    this.setSelectedVersionToDefault();
     this.createVersionDialog.show();
   }
 
@@ -280,16 +282,16 @@ export class ApplicationComponent implements OnInit {
 
   closeUpdateApplicationDialog() {
     this.updateApplicationDialog.hide();
-    this.setSelectedApplicationToDefault()
+    this.setSelectedApplicationToDefault();
   }
 
   closeDeleteApplicationDialog() {
     this.deleteApplicationDialog.hide();
-    this.setSelectedApplicationToDefault()
+    this.setSelectedApplicationToDefault();
   }
   closeCreateApplicationDialog() {
     this.createApplicationDialog.hide();
-    this.setSelectedApplicationToDefault()
+    this.setSelectedApplicationToDefault();
   }
 
   openUpdateVersionDialog(version: any) {
@@ -306,7 +308,6 @@ export class ApplicationComponent implements OnInit {
   openDeleteVersionDialog(version) {
     this.selectedVersion = JSON.parse(JSON.stringify(version));
     this.deleteVersionDialog.show();
-
   }
 
   closeDeleteVersionDialog() {

@@ -70,6 +70,10 @@ export class ApplicationAnalysisComponent extends UnsubscribeOnDestroy implement
       }
     );
   }
+
+  cancel() {
+    this.router.navigate(['/dashboard/analysis']);
+  }
   createModel(analysis) {
     const a: any = {};
     a.analysisId = analysis.AnalysisId;

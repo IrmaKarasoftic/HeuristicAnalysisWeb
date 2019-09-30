@@ -6,42 +6,7 @@
   </div>
 
   <ngb-tabset [destroyOnHide]="false">
-    <ngb-tab title="Severity level">
-      <ng-template ngbTabContent>
-        <div class="container d-flex align-items-center justify-content-center">
-          <table>
-            <tr>
-              <td style="width:700px;height:50%"><canvas id="pieChart"></canvas></td>
-            </tr>
-          </table>
-        </div>
-
-        <div class="container">
-          <div *ngIf="data !== null && data.Answers !== null">
-            <div *ngFor="let item of data.Answers" class="report-answers">
-              <div
-                class="card"
-                [ngClass]="{
-                  'border-danger': item.Level === 3,
-                  'border-warning': item.Level === 2,
-                  'border-info': item.Level === 1
-                }"
-              >
-                <div class="card-body">
-                  <h4 class="card-title">Description: {{ item.Description }}</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">Location: {{ item.Location }}</h6>
-                  <p class="card-text">Recommendation: {{ item.Recommendation }}</p>
-                  <div class="image-container" *ngFor="let img of item.Images">
-                    <img [src]="img.Img" alt="" class="image" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Table Diagram">
+    <ngb-tab title="Metrics">
       <ng-template ngbTabContent>
         <div class="tab-container">
           <div class="tab-table">
@@ -76,6 +41,41 @@
                 <b>{{ tableData.DiagramModel.NumberOfAnswers }}</b>
               </div>
               <div class="col-md-1"><b>100%</b></div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Detailed report">
+      <ng-template ngbTabContent>
+        <div class="container d-flex align-items-center justify-content-center">
+          <table>
+            <tr>
+              <td style="width:700px;height:50%"><canvas id="pieChart"></canvas></td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="container">
+          <div *ngIf="data !== null && data.Answers !== null">
+            <div *ngFor="let item of data.Answers" class="report-answers">
+              <div
+                class="card"
+                [ngClass]="{
+                  'border-danger': item.Level === 3,
+                  'border-warning': item.Level === 2,
+                  'border-info': item.Level === 1
+                }"
+              >
+                <div class="card-body">
+                  <h4 class="card-title">Description: {{ item.Description }}</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">Location: {{ item.Location }}</h6>
+                  <p class="card-text">Recommendation: {{ item.Recommendation }}</p>
+                  <div class="image-container" *ngFor="let img of item.Images">
+                    <img [src]="img.Img" alt="" class="report-image" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

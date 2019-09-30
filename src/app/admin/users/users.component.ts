@@ -227,7 +227,7 @@ export class UsersComponent implements OnInit {
     (this.handleUser.UserId = user.Id), (this.handleUser.GroupId = this.selectedUserGroup.Id);
     this.userService.assignUser(this.handleUser).subscribe(
       res => {
-        var foundIndex = this.groupUsers.Users.indexOf(user);
+        const foundIndex = this.groupUsers.Users.indexOf(user);
         this.groupUsers.Users[foundIndex].Assigned = !this.groupUsers.Users[foundIndex].Assigned;
       },
       (err: any) => {
@@ -315,6 +315,7 @@ export class UsersComponent implements OnInit {
   }
 
   closeManageUsersDialog() {
+    this.getAllUserGroups();
     this.manageUsersDialog.hide();
   }
 }

@@ -63,14 +63,29 @@
   <div header>
     <div class="title-2">Create application</div>
   </div>
-  <div content class="d-flex flex-column mb-3">
+  <div content class="d-flex flex-column mb-3 col-12">
     <label>Name</label>
     <input type="text" class="form-control" id="" [(ngModel)]="selectedApplication.Name" />
   </div>
-  <div content class="d-flex flex-column mb-3">
+  <div content class="d-flex flex-column mb-3 col-12">
     <label>Url</label>
     <input type="text" class="form-control" id="" [(ngModel)]="selectedApplication.Url" />
   </div>
+  <div content class="d-flex flex-column mb-3 col-5">
+    <label>Application Type</label>
+    <select
+      name="appType"
+      class="d-flex flex-fill"
+      [(ngModel)]="selectedAppType"
+      (ngModelChange)="onAppTypeChanged($event)"
+    >
+      <option [value]="1">Web</option>
+      <option [value]="2">Mobile</option>
+      <option [value]="3">Desktop</option>
+      <option [value]="4">Games</option>
+    </select>
+  </div>
+
   <div footer></div>
 </app-dialog>
 
@@ -84,15 +99,29 @@
   <div header>
     <div class="title-2">Update application</div>
   </div>
-  <div content class="d-flex flex-column mb-3">
+  <div content class="d-flex flex-column mb-3 col-12">
     <label>Name</label>
     <input type="text" class="form-control" id="" [(ngModel)]="selectedApplication.Name" />
   </div>
-  <div content class="d-flex flex-column mb-3">
+  <div content class="d-flex flex-column mb-3 col-12">
     <label>Url</label>
     <input type="text" class="form-control" id="" [(ngModel)]="selectedApplication.Url" />
   </div>
   <div footer></div>
+  <div content class="d-flex flex-column mb-3 col-5">
+    <label>Application Type</label>
+    <select
+      name="appType"
+      class="d-flex flex-fill"
+      [(ngModel)]="selectedApplication.ApplicationType"
+      (ngModelChange)="onAppTypeChanged($event)"
+    >
+      <option [value]="1">Web</option>
+      <option [value]="2">Mobile</option>
+      <option [value]="3">Desktop</option>
+      <option [value]="4">Games</option>
+    </select>
+  </div>
 </app-dialog>
 
 <app-dialog

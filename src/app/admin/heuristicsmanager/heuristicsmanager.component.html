@@ -53,6 +53,10 @@
         <div class="heuristics-list">
           <ol>
             <li *ngFor="let item of nielsenHeuristics" class="heuristics-list-item">
+              <b
+                ><em>{{ item.HeuristicTitle }}</em></b
+              >
+              -
               {{ item.HeuristicText }}
             </li>
           </ol>

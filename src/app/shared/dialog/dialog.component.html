@@ -1,4 +1,4 @@
-<div [ngClass]="{'dialog-container':visible}" (click)="hideModal($event)">
+<div [ngClass]="{ 'dialog-container': visible }">
   <div *ngIf="visible" (click)="hide()"></div>
   <div [@dialog] *ngIf="visible" class="dialog">
     <div class="dialog-header">
@@ -12,7 +12,12 @@
         </ng-template>
       </div>
     </div>
-    <div (keydown)="keyDownFunction($event)" id="dialog-content" class="dialog-content" fxLayout="row">
+    <div
+      (keydown)="keyDownFunction($event)"
+      id="dialog-content"
+      class="dialog-content"
+      fxLayout="row"
+    >
       <ng-content select="[content]"></ng-content>
     </div>
     <div class="dialog-footer hr-top">
@@ -20,13 +25,24 @@
         <ng-content select="[footer]"></ng-content>
       </div>
       <div>
-        <button id="dialog-close-button" class="btn btn-secondary close-button-margin-bottom" (click)="onClose()" *ngIf="closeButtonLabel">
-          {{closeButtonLabel}}
+        <button
+          id="dialog-close-button"
+          class="btn btn-secondary close-button-margin-bottom"
+          (click)="onClose()"
+          *ngIf="closeButtonLabel"
+        >
+          {{ closeButtonLabel }}
         </button>
-        <button id="dialog-submit-button" (click)="onSubmit()" [ngClass]="submitButtonClass" *ngIf="submitButtonLabel"
-          class="close-button-margin-bottom" [disabled]="buttonDisabled">
+        <button
+          id="dialog-submit-button"
+          (click)="onSubmit()"
+          [ngClass]="submitButtonClass"
+          *ngIf="submitButtonLabel"
+          class="close-button-margin-bottom"
+          [disabled]="buttonDisabled"
+        >
           <app-loader name="modal-spinner" (showChange)="updateButton($event)"></app-loader>
-          <span [innerHTML]="submitButtonLabel" class='dialog-submit-button-text'></span>
+          <span [innerHTML]="submitButtonLabel" class="dialog-submit-button-text"></span>
         </button>
       </div>
     </div>

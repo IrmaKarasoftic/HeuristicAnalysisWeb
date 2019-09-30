@@ -1,15 +1,13 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DialogService {
+  visible: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-    visible: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  constructor() {}
 
-    constructor() {
-    }
-
-    hide() {
-        this.visible.next(false);
-    }
+  hide() {
+    this.visible.next(false);
+  }
 }
